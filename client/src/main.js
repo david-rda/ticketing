@@ -8,22 +8,7 @@ import HomeComponent from "./components/Pages/Home.vue";
 import AddTask from "./components/Pages/Tasks/Add.vue";
 // === კომპონენტები ===
 
-/*========= მარშუტები ==========*/
-const routes = [
-    {
-        path : "/",
-        component : HomeComponent
-    },
-    {
-        path : "/login",
-        component : LoginComponent
-    },
-    {
-        path : "/task/add",
-        component : AddTask
-    }
-];
-/*========= მარშუტები ==========*/
+import routes from "./routes/routes";
 
 const router = createRouter({
     routes : routes,
