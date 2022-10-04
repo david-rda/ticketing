@@ -1,0 +1,195 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api documentation",
+        "description": "Ticketing system api documentation",
+        "contact": {
+            "email": "davit.chechelashvili@rda.gov.ge"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/task/add": {
+            "post": {
+                "tags": [
+                    "თასქების API"
+                ],
+                "summary": "თასქის დამატების მარსუტი",
+                "description": "თასქის დამატების მეთოდი",
+                "operationId": "acffc0c73df6121a2a9d7e63b6a784fe",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "priority": {
+                                        "type": "number",
+                                        "format": "number"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "თასქი დაემატა"
+                    },
+                    "422": {
+                        "description": "თასქი ვერ დაემატა"
+                    }
+                }
+            }
+        },
+        "/api/user/insert": {
+            "post": {
+                "tags": [
+                    "მომხმარებლების API"
+                ],
+                "summary": "მომხმარებლების ატვირთვის მარშუტი",
+                "description": "მომხმარებელთა ატვირთვის მეთოდი",
+                "operationId": "e7e568e34b3a248082a6fabf00f2b95b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "position",
+                                    "role",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "john doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "johndoe@simple.com"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "role": {
+                                        "type": "number",
+                                        "format": "number"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "****"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "მომხმარებლები აიტვირთა"
+                    },
+                    "422": {
+                        "description": "მომხმარებლები ვერ აიტვირთა"
+                    }
+                },
+                "security": [
+                    {
+                        "0": "bearerAuth",
+                        "1": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "ავტორიზაციის API"
+                ],
+                "summary": "ავტორიზაციის მარშუტი",
+                "description": "ავტორიზაციის მეთოდი",
+                "operationId": "d89ebc968b603de212f5cb1c5eb34b16",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ავტორიზაცია წარმატებით დასრულდა"
+                    },
+                    "422": {
+                        "description": "ავტორიზაცია ვერ განხორციელდა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "სისტემიდან გამოსვლის API"
+                ],
+                "summary": "სისტემიდან გამოსვლის მარშუტი",
+                "description": "სისტემიდან გამოსვლის მეთოდი",
+                "operationId": "269eeaa1f95da774349bbc8f2cbc3c64",
+                "responses": {
+                    "200": {
+                        "description": "Logged out!"
+                    },
+                    "422": {
+                        "description": "Error!"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    }
+}
