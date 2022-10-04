@@ -60,8 +60,6 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "../../assets/css/variables.scss";
-
     .card {
         margin-left: 50px !important;
     }

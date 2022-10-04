@@ -77,7 +77,6 @@
 
 <style lang="scss" scoped>
     @import "../../assets/css/variables.scss"; // ფერების ცვლადები
-    @import "../../assets/css/fonts.scss"; // ფონტები
 
     input {
         width: 400px;

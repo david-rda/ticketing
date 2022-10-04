@@ -3,6 +3,9 @@
         <li>
             <router-link to="/"><img src="../../../assets/images/RDA-Logo-Geo.png"></router-link>
         </li>
+        <li>
+            <router-link to="/task/add">დავალების დამატება</router-link>
+        </li>
         <li style="float: right">
             <a><router-link to="#" @click.prevent="logout()"><img src="../../../assets/icons/logout.svg" class="icon-header"></router-link></a>
         </li>
