@@ -15,25 +15,25 @@ Route::post("/insert", [UserController::class, "Insert_Users"]); // მომხ
 Route::group(["prefix" => "priority", "middleware" => "auth:api"], function() {
     Route::get("/list", [PriorityController::class, "Priority_List"]); // პრიორიტეტების სიის წამოღების მარშუტი
 
-    Route::delete("/delete/{id}", [PriorityController::class, "Priority_Delete"])->where(["id" => "[0-9]+"]);
+    Route::delete("/delete/{id}", [PriorityController::class, "Priority_Delete"])->where(["id" => "[0-9]+"]); // პრიორიტეტის წაშლის მარშუტი
 
-    Route::post("/add", [PriorityController::class, "Priority_Add"]);
+    Route::post("/add", [PriorityController::class, "Priority_Add"]); // პრიორიტეტის დამატების მარშუტი
 });
 
 Route::group(["prefix" => "status", "middleware" => "auth:api"], function() {
     Route::get("/list", [StatusController::class, "Status_List"]); // სტატუსების სიის წამოღების მარშუტი
 
-    Route::delete("/delete/{id}", [StatusController::class, "Status_Delete"])->where(["id" => "[0-9]+"]);
+    Route::delete("/delete/{id}", [StatusController::class, "Status_Delete"])->where(["id" => "[0-9]+"]); // სტატუსის წაშლის მარშუტი
 
-    Route::post("/add", [StatusController::class, "Status_Add"]);
+    Route::post("/add", [StatusController::class, "Status_Add"]); // სტატუსის დამატების მარშუტი
 });
 
 Route::group(["prefix" => "task", "middleware" => "auth:api"], function() {
     Route::get("/add", [TaskController::class, "Add_Task"]); // სტატუსების სიის წამოღების მარშუტი
 
-    Route::delete("/delete/{id}", [TaskController::class, "Task_Delete"])->where(["id" => "[0-9]+"]);
+    Route::delete("/delete/{id}", [TaskController::class, "Task_Delete"])->where(["id" => "[0-9]+"]); // თასქის წაშლის მარშუტი
 
-    Route::post("/by_status/{id}", [TaskController::class, "Task_By_Status"])->where(["id" => "[0-9]+"]);
+    Route::post("/by_status/{id}", [TaskController::class, "Task_By_Status"])->where(["id" => "[0-9]+"]); // თასქების წამოღების მარშუტი სტატუსების მიხედვით
 });
 
 ?>
