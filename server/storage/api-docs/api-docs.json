@@ -103,7 +103,7 @@
                 "tags": [
                     "სტატუსების API"
                 ],
-                "summary": "პრიორიტეტების წამოღების მარსუტი",
+                "summary": "პრიორიტეტების წამოღების მარშუტი",
                 "operationId": "33a8510aae252e779cc5d1a1544f5fa0",
                 "responses": {
                     "200": {
@@ -125,7 +125,7 @@
                 "tags": [
                     "სტატუსების API"
                 ],
-                "summary": "სტატუსის წაშლის მარსუტი",
+                "summary": "სტატუსის წაშლის მარშუტი",
                 "operationId": "9dfef41f8e63eda737719bd7128003c6",
                 "parameters": [
                     {
@@ -151,6 +151,40 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/status/add": {
+            "post": {
+                "tags": [
+                    "სტატუსების API"
+                ],
+                "summary": "სტატუსების დამატების მარშუტი",
+                "description": "სტატუსების დამატების მეთოდი",
+                "operationId": "8f17bb51257dd4f89449ba5eb009be40",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "სტატუსი დაემატა"
+                    },
+                    "422": {
+                        "description": "სტატუსი ვერ დაემატა"
+                    }
+                }
             }
         },
         "/api/task/add": {

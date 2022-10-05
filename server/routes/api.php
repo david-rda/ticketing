@@ -16,12 +16,16 @@ Route::group(["prefix" => "priority", "middleware" => "auth:api"], function() {
     Route::get("/list", [PriorityController::class, "Priority_List"]); // პრიორიტეტების სიის წამოღების მარშუტი
 
     Route::delete("/delete/{id}", [PriorityController::class, "Priority_Delete"])->where(["id" => "[0-9]+"]);
+
+    Route::post("/add", [PriorityController::class, "Priority_Add"]);
 });
 
 Route::group(["prefix" => "status", "middleware" => "auth:api"], function() {
     Route::get("/list", [StatusController::class, "Status_List"]); // სტატუსების სიის წამოღების მარშუტი
 
     Route::delete("/delete/{id}", [StatusController::class, "Status_Delete"])->where(["id" => "[0-9]+"]);
+
+    Route::post("/add", [StatusController::class, "Status_Add"]);
 });
 
 ?>
