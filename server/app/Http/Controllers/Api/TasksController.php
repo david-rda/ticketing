@@ -83,4 +83,52 @@ class TasksController extends Controller implements ITasks
             ], 422);
         }
     }
+
+    /**
+     * თასქის წაშლის მეთოდი
+     * @param int<id>
+     * @method DELETE
+     * @return json
+     * 
+     * @OA\Delete(
+     *     path="/api/task/delete/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"თასქების API"},
+     *     summary="თასქის წაშლის მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="თასქი წაიშალა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="თასქი ვერ წაიშალა",
+     *         response=422
+     *     ),
+     * 
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="თასქის აიდი",
+     *         required=true,
+     *         in="path",
+     *         
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     * )
+     */
+    public function Task_Delete($id) {
+        try {
+            $delete_task = Task::whereId($id)->delete();
+
+            return response()->json([
+                "message" => "თასქი წაიშალა"
+            ], 200);
+        }catch(Exception $e) {
+            return response()->json([
+                "message" => "თასქი ვერ წაიშალა"
+            ], 422);
+        }
+    }
 }

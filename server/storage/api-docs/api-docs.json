@@ -233,6 +233,40 @@
                 }
             }
         },
+        "/api/task/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "თასქების API"
+                ],
+                "summary": "თასქის წაშლის მარშუტი",
+                "description": "თასქის წაშლის მეთოდი",
+                "operationId": "f6f182d3dc181762cc091fd9262c717c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "თასქის აიდი",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "თასქი წაიშალა"
+                    },
+                    "422": {
+                        "description": "თასქი ვერ წაიშალა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/user/insert": {
             "post": {
                 "tags": [
