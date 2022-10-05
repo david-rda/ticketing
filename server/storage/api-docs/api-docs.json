@@ -9,6 +9,150 @@
         "version": "1.0"
     },
     "paths": {
+        "/api/priority/list": {
+            "get": {
+                "tags": [
+                    "პრიორიტეტების API"
+                ],
+                "summary": "პრიორიტეტების წამოღების მარსუტი",
+                "operationId": "73d87df455e1af65abdcf97191dee7cf",
+                "responses": {
+                    "200": {
+                        "description": "პრიორიტეტები წამოღებულია"
+                    },
+                    "422": {
+                        "description": "პრიორიტეტები არ არსებობს"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/priority/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "პრიორიტეტების API"
+                ],
+                "summary": "პრიორიტეტების წაშლის მარსუტი",
+                "operationId": "b3fcf68864c1f776d98f60a008686e0d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "პრიორიტეტის აიდი",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "პრიორიტეტეი წაიშალა"
+                    },
+                    "422": {
+                        "description": "პრიორიტეტი ვერ წაიშალა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/priority/add": {
+            "post": {
+                "tags": [
+                    "პრიორიტეტების API"
+                ],
+                "summary": "პრიორიტეტის დამატების მარსუტი",
+                "description": "პრიორიტეტის დამატების მეთოდი",
+                "operationId": "79fcc10d1fa8cb0a887d041e4d87220d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "პრიორიტეტი დაემატა"
+                    },
+                    "422": {
+                        "description": "პრიორიტეტი ვერ დაემატა"
+                    }
+                }
+            }
+        },
+        "/api/status/list": {
+            "get": {
+                "tags": [
+                    "სტატუსების API"
+                ],
+                "summary": "პრიორიტეტების წამოღების მარსუტი",
+                "operationId": "33a8510aae252e779cc5d1a1544f5fa0",
+                "responses": {
+                    "200": {
+                        "description": "პრიორიტეტები წამოღებულია"
+                    },
+                    "422": {
+                        "description": "პრიორიტეტები არ არსებობს"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/status/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "სტატუსების API"
+                ],
+                "summary": "სტატუსის წაშლის მარსუტი",
+                "operationId": "9dfef41f8e63eda737719bd7128003c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "სტატუსის აიდი",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "სტატუსი წაიშალა"
+                    },
+                    "422": {
+                        "description": "სტატუსი ვერ წაიშალა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/task/add": {
             "post": {
                 "tags": [

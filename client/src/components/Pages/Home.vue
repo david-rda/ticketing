@@ -6,7 +6,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="card text-center bg-info text-white col-md-2 col-lg-2 col-sm-12 col-xs-12">
                     <div class="card-header">
-                        <h5 class="card-title">შემოსული დავალებები</h5>
+                        <h5 class="card-title">შემოსული</h5>
                     </div>
                     <div class="card-body text-center">
                         <h1>120</h1>
@@ -15,7 +15,7 @@
 
                 <div class="card text-center bg-warning text-white col-md-2 col-lg-2 col-sm-12 col-xs-12">
                     <div class="card-header">
-                        <h5 class="card-title">მიმდინარე დავალებები</h5>
+                        <h5 class="card-title">მიმდინარე</h5>
                     </div>
                     <div class="card-body text-center">
                         <h1>1220</h1>

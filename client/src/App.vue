@@ -42,5 +42,6 @@
 
     * {
         box-sizing: border-box !important;
+        font-family: "neue_bold" !important;
     }
 </style>

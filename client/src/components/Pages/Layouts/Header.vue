@@ -1,15 +1,24 @@
 <template>
-    <ul>
-        <li>
-            <router-link to="/"><img src="../../../assets/images/RDA-Logo-Geo.png"></router-link>
-        </li>
-        <li>
-            <router-link to="/task/add">დავალების დამატება</router-link>
-        </li>
-        <li style="float: right">
-            <a><router-link to="#" @click.prevent="logout()"><img src="../../../assets/icons/logout.svg" class="icon-header"></router-link></a>
-        </li>
-    </ul>
+    <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container">
+            <router-link to="/" class="navbar-brand"><img src="../../../assets/images/RDA-Logo-Geo.png" class="brand"></router-link>
+
+            <div class="collapse navbar-collapse" id="mynav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <router-link class="nav-link" data-toggle="dropdown-toggle" data-bs-toggle="dropdown" to="/task/add">დავალების დამატება</router-link>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="#" @click.prevent="logout()" title="სისტემიდან გასვლა">
+                            <img src="../../../assets/icons/logout.svg" class="icon-header">
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </template>
 
 <script>
@@ -43,38 +52,20 @@
 </script>
 
 <style scoped lang="scss">
-    ul {
-        list-style-type: none;
-        background-color: #fff;
-        margin: 0;
-        padding: 0px 20px;
-        box-shadow: 0px 0px 14px #d4d3d3;
-        overflow: hidden;
+    .brand {
+        width: 120px;
+    }
 
-        li {
-            float: left;
-            margin: 0px 10px;
+    .nav-link {
+        color: #202020 !important;
 
-            a {
-                display: block;
-                padding: 10px;
-                text-decoration: none;
-                height: 100% !important;
-
-                &:last-child:hover {
-                    background-color: lightgray;
-                }
-                
-                .icon-header {
-                    height: 30px;
-                    width: 20px;
-                }
-            }
+        &:hover {
+            color: lighten(#202020, 30%) !important;
         }
+    }
 
-        img {
-            width: 120px;
-            display: block;
-        }
+    .icon-header {
+        width: 20px;
+        height: 20px;
     }
 </style>

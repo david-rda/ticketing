@@ -63,7 +63,7 @@ class TasksController extends Controller implements ITasks
 
                     $created_id = $created->id;
 
-                    foreach($validated()["performers"] as $performer_id) {
+                    foreach($validated["performers"] as $performer_id) {
                         TaskHasPerformer::insert([
                             "task_id" => $created_id,
                             "performer_id" => $performer_id,

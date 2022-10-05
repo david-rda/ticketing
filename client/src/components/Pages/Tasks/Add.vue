@@ -1,17 +1,27 @@
 <template>
     <div>
-        
+        <HeaderComponent />
+
     </div>
 </template>
 
 <script>
-    //import HeaderComponent from "../Layouts/Header.vue";
+    import HeaderComponent from "../Layouts/Header.vue";
 
     export default {
         name : "AddTask",
 
+        data() {
+            return {
+                end_date : new Date(),
+                priority : "",
+                title : "",
+                performers : []
+            }
+        },
+
         components : {
-            //HeaderComponent
+            HeaderComponent,
         },
 
         mounted() {
