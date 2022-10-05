@@ -70,7 +70,7 @@ class PriorityController extends Controller implements IPriority
      *     )
      * )
      */
-    public function Priority_Delete($id) {
+    public function Priority_Delete(int $id) {
         try {
             $priority_delete = Priority::whereId($id)->forceDelete();
 

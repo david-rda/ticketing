@@ -70,7 +70,7 @@ class StatusController extends Controller
      *     )
      * )
      */
-    public function Status_Delete($id) {
+    public function Status_Delete(int $id) {
         try {
             $status_delete = Status::whereId($id)->forceDelete();
 

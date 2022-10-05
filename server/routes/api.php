@@ -28,4 +28,12 @@ Route::group(["prefix" => "status", "middleware" => "auth:api"], function() {
     Route::post("/add", [StatusController::class, "Status_Add"]);
 });
 
+Route::group(["prefix" => "task", "middleware" => "auth:api"], function() {
+    Route::get("/add", [TaskController::class, "Add_Task"]); // სტატუსების სიის წამოღების მარშუტი
+
+    Route::delete("/delete/{id}", [TaskController::class, "Task_Delete"])->where(["id" => "[0-9]+"]);
+
+    Route::post("/by_status/{id}", [TaskController::class, "Task_By_Status"])->where(["id" => "[0-9]+"]);
+});
+
 ?>
