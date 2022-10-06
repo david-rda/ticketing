@@ -41,20 +41,52 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" role="modal" id="addTaskModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">თასქის დამატება</h5>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-white mt-5">
+            <table class="table table-hover">
+                <thead class="text-center">
+                    <tr>
+                        <th>დასახელება</th>
+                        <th>შემსრულებლები</th>
+                        <th>ვადა</th>
+                        <th>პრიორიტეტი</th>
+                        <th>სტატუსი</th>
+                        <th><button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#addTaskModal"><BIconPlus />დამატება</button></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </template>
 
 <script>
     import HeaderComponent from "./Layouts/Header.vue";
-    //import { QuillEditor } from "@vueup/vue-quill";
-    //import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
     export default {
         name : "HomeComponent",
 
         components : {
             HeaderComponent,
-            //QuillEditor
+        },
+
+        mounted() {
+            console.log(this.$store.state.role);
         }
     }
 </script>

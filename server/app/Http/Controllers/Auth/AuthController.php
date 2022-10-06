@@ -76,10 +76,10 @@ class AuthController extends Controller implements IAuth
                 $request->session()->regenerate();
                 $token = Auth::user()->createToken("ACCESS_TOKEN")->accessToken;
 
-
                 return response()->json([
                     "token" => $token,
-                    "logged_in" => true
+                    "logged_in" => true,
+                    "user" => auth()->user()
                 ], 200);
             }else {
                 return response()->json([

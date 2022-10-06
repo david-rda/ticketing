@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@vuepic/vue-datepicker": "^3.5.0",
     "@vueup/vue-quill": "^1.0.0-beta.10",
+    "bootstrap-icons-vue": "^1.8.1",
     "core-js": "^3.8.3",
     "node-sass": "^7.0.3",
     "vue": "^3.2.13"

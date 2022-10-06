@@ -62,6 +62,9 @@
 
                     window.localStorage.setItem("token", login.data.token);
                     window.localStorage.setItem("login", login.data.logged_in);
+                    window.localStorage.setItem("role", login.data.user.role);
+
+                    this.$store.commit("setRole");
 
                     this.$router.push("/");
                 }catch(err) {
