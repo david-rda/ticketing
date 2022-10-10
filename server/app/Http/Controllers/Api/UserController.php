@@ -80,7 +80,6 @@ class UserController extends Controller implements IUser
 
     /** 
      * მომხმარებელთა სიის გამოტანის მეტოდი
-     * @param Request
      * @method GET
      * @return json
      * 
