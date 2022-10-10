@@ -19,10 +19,24 @@ class TaskHasPerformer extends Model
         "task_id", "performer_id"
     ];
 
+    protected $appends = [
+        "tasks"
+    ];
+
+    protected $hidden = [
+        "task"
+    ];
+
     public $timestamps = true;
 
-    public function performers() {
-        return $this->hasMany(User::class, "id", "performer_id");
+    public function task() {
+        return $this->hasMany(Task::class, "id", "task_id");
+    }
+
+    public function tasks() : Attribute {
+        return Attribute::make(
+            get : fn() => $this->task
+        );
     }
 }
 ?>

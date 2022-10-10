@@ -53,7 +53,7 @@ class TasksController extends Controller implements ITasks
             $validated = $request->validated();
             
             if($validated) {
-                DB::transaction(function() use($validated) {
+                DB::transaction(function() use($validated, $request) {
                     $create_task = Task::create([
                         "title" => $validated["title"],
                         "description" => $validated["description"],

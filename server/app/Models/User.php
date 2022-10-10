@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Models\Task;
 
 class User extends Authenticatable
 {
@@ -20,7 +21,23 @@ class User extends Authenticatable
         "name", "email", "position", "role", "password"
     ];
 
+    protected $appends = [
+        "task"
+    ];
+
     public $timestamps = false;
+
+    protected $hidden = [
+        "user_tasks"
+    ];
+
+    public function user_tasks() {
+        return $this->hasMany(TaskHasPerformer::class, "performer_id", "id");
+    }
+
+    public function getTaskAttribute() {
+        return $this->user_tasks;
+    }
 }
 
 ?>

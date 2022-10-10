@@ -51,7 +51,7 @@
                     <div class="modal-body">
                         <div class="list-unstyled" v-for="(user, index) in users" :key="index">
                             <li>
-                                <label><input type="checkbox" @change="getVal($event)" v-model="userids" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
+                                <label><input type="checkbox" v-model="userids" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
                             </li>
                         </div>
                     </div>
@@ -140,10 +140,6 @@
                     }
                 }
             },
-
-            getVal() {
-                window.alert(this.userids);
-            }
         }
     }
 </script>
