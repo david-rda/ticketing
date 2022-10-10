@@ -7,6 +7,7 @@ use App\Http\Interfaces\IPriority; //პრიორიტეტების ი
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\PriorityAddRequest;
+use App\Http\Requests\EditPriorityRequest;
 use App\Models\Priority;
 
 class PriorityController extends Controller implements IPriority
@@ -130,6 +131,69 @@ class PriorityController extends Controller implements IPriority
             }catch(Exception $e) {
                 return response()->json([
                     "message" => "პრიორიტეტი ვერ დაემატა"
+                ], 422);
+            }
+        }
+    }
+
+    /**
+     * პრიორიტეტების დარედაქტირების მეთოდი
+     * @method PUT
+     * @param int $id, EditPriorityRequest $request
+     * @return json
+     * 
+     * @OA\Put(
+     *     path="/api/priority/edit/{id}",
+     *     tags={"პრიორიტეტების API"},
+     *     summary="პრიორიტეტის დარედაქტირების მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="პრიორიტეტი დარედაქტირდა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="პრიორიტეტი ვერ დარედაქტირდა",
+     *         response=422
+     *     ),
+     * 
+     *     @OA\RequestBody(
+     *         required = true,
+     * 
+     *         @OA\JsonContent(
+     *             required = {"name"},
+     * 
+     *             @OA\Property(property="name", type="string", format="string")
+     *         )
+     *     ),
+     * 
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="priority id",
+     *         in="path",
+     *         required=true,
+     * 
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     * )
+     */
+    public function Edit_Priority(EditPriorityRequest $request, int $id) {
+        $validated = $request->validated();
+
+        if($validated) {
+            try {
+                Priority::whereId($id)->update([
+                    "name" => $validated["name"]
+                ]);
+
+                return response()->json([
+                    "message" => "პრიორიტეტი დარედაქტირდა"
+                ], 200);
+            }catch(Exception $e) {
+                return response()->json([
+                    "message" => "პრიორიტეტი ვერ დარედაქტირდა"
                 ], 422);
             }
         }
