@@ -6,7 +6,7 @@
             <div class="collapse navbar-collapse" id="mynav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <router-link class="nav-link" data-toggle="dropdown-toggle" data-bs-toggle="dropdown" to="/task/add">დავალების დამატება</router-link>
+                        <router-link class="nav-link" to="/task/add">დავალების დამატება</router-link>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">

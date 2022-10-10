@@ -168,4 +168,74 @@ class TasksController extends Controller implements ITasks
     public function Task_By_Status(int $status_id) {
         return Status::where("status_id", $status_id)->get();
     }
+
+    /**
+     * თასქის რედაქტირების მეთოდი
+     * @param int<id>, Request
+     * @method PUT
+     * @return json
+     * 
+     * @OA\Put(
+     *     path="/api/task/edit/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"თასქების API"},
+     *     summary="თასქის რედაქტირების მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="თასქი დარედაქტირდა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="თასქი ვერ დარედაქტირდა",
+     *         response=422
+     *     ),
+     * 
+     *     @OA\RequestBody(
+     *         required = true,
+     * 
+     *         @OA\JsonContent(
+     *             required = {"title", "description", "priority", "end_date"},
+     * 
+     *             @OA\Property(property="title", type="string", format="string"),
+     *             @OA\Property(property="description", type="string", format="string"),
+     *             @OA\Property(property="priority", type="number", format="number"),
+     *             @OA\Property(property="end_date", type="datetime", format="date-time"),
+     *         )
+     *     ),
+     * 
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="თასქის აიდი",
+     *         required=true,
+     *         in="path",
+     *         
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     * )
+     */
+    public function Edit_Task(EditTaskRequest $request, int $id) {
+        $validated = $request->validated();
+
+        if($validated) {
+            try {
+                Task::whereId($id)->update([
+                    "title" => $validated["title"],
+                    "description" => $validated["description"],
+                    "priority" => $validated["priority"],
+                    "end_date" => $validated["end_date"]
+                ]);
+
+                return response()->json([
+                    "message" => "თასქი დარედაქტირდა"
+                ], 200);
+            }catch(Exception $e) {
+                return response()->json([
+                    "message" => "თასქი ვერ დარედაქტირდა"
+                ], 422);
+            }
+        }
+    }
 }
