@@ -18,7 +18,7 @@ class TasksController extends Controller implements ITasks
     /**
      * თასქის დამატების მეთოდი
      * @method POST
-     * @param AddTaskRequest
+     * @param AddTaskRequest $request
      * @return json
      * 
      * @OA\Post(
@@ -134,45 +134,8 @@ class TasksController extends Controller implements ITasks
     }
 
     /**
-     * @param int<id>
-     * @method GET
-     * @return json
-     * 
-     * @OA\Get(
-     *     path="/api/task/by_status/{id}",
-     *     security={{"bearerAuth":{}}},
-     *     tags={"თასქების API"},
-     *     summary="თასქის წამოღების მარშუტი სტატუსის აიდის მიხედვით",
-     * 
-     *     @OA\Response(
-     *         description="OK",
-     *         response=200
-     *     ),
-     * 
-     *     @OA\Response(
-     *         description="Unprocessable content",
-     *         response=422
-     *     ),
-     * 
-     *     @OA\Parameter(
-     *         name="id",
-     *         description="სტატუსის აიდი",
-     *         required=true,
-     *         in="path",
-     *         
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
-     *     )
-     * )
-     */
-    public function Task_By_Status(int $status_id) {
-        return Status::where("status_id", $status_id)->get();
-    }
-
-    /**
      * თასქის რედაქტირების მეთოდი
-     * @param int<id>, Request
+     * @param int<id>,EditTaskRequest $request
      * @method PUT
      * @return json
      * 
