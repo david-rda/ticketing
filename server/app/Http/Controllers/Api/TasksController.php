@@ -48,10 +48,10 @@ class TasksController extends Controller implements ITasks
      *     )
      * )
      */
-    public function Add_Task(AddTaskRequest $request) {
+    public function Add_Task(AddTaskRequest $request) {        
         try {
             $validated = $request->validated();
-
+            
             if($validated) {
                 DB::transaction(function() use($validated) {
                     $create_task = Task::create([
@@ -63,6 +63,13 @@ class TasksController extends Controller implements ITasks
                     ]);
 
                     $id = $create_task->id;
+
+                    foreach($request->users as $users) {
+                        TaskHasPerformer::insert([
+                            "performer_id" => $users,
+                            "task_id" => $id
+                        ]);
+                    }
                 });
 
                 DB::commit();

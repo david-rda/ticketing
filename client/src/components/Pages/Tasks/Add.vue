@@ -16,9 +16,9 @@
                     </div>
                     <div class="mb-3 col-lg-6 col-md-6">
                         <label for="priority">პრიორიტეტი</label>
-                        <select class="form-select" v-model="priority">
+                        <select class="form-select" v-model="priority" id="priority" name="priority">
                             <option selected disabled value="">აირჩიეთ პრიორიტეტი</option>
-                                <option :value="data.id" v-for="(data, index) in priority_list" v-bind:key="index">{{ data.name }}</option>
+                            <option :value="data.id" v-for="(data, index) in priority_list" v-bind:key="index">{{ data.name }}</option>
                         </select>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="modal-body">
                         <div class="list-unstyled" v-for="(user, index) in users" :key="index">
                             <li>
-                                <label><input type="checkbox" ref="userid" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
+                                <label><input type="checkbox" @change="getVal($event)" v-model="userids" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
                             </li>
                         </div>
                     </div>
@@ -85,8 +85,8 @@
                 created : "",
                 msg : "",
                 users : [],
-                
-                responsibles : []
+
+                userids : []
             }
         },
 
@@ -124,7 +124,8 @@
                         title : this.title,
                         description : this.description,
                         priority : this.priority,
-                        end_date : this.end_date
+                        end_date : this.end_date,
+                        users : this.userids
                     }, {
                         headers : {
                             "Authorization" : `Bearer ${this.$store.state.token}`
@@ -139,6 +140,10 @@
                     }
                 }
             },
+
+            getVal() {
+                window.alert(this.userids);
+            }
         }
     }
 </script>
@@ -151,7 +156,7 @@
     }
 
     label, button, input {
-        font-size: 14px;
+        font-size: 14px !important;
     }
 
     .custom-container {
