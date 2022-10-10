@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PriorityController;
+use App\Http\Controllers\Api\TasksController;
+use App\Http\Controllers\Api\StatusController;
 
 Route::post("/login", [AuthController::class, "Login"]);
 Route::post("/logout", [LogoutController::class, "Logout"]);
@@ -29,11 +31,11 @@ Route::group(["prefix" => "status", "middleware" => "auth:api"], function() {
 });
 
 Route::group(["prefix" => "task", "middleware" => "auth:api"], function() {
-    Route::get("/add", [TaskController::class, "Add_Task"]); // სტატუსების სიის წამოღების მარშუტი
+    Route::post("/add", [TasksController::class, "Add_Task"]); // სტატუსების სიის წამოღების მარშუტი
 
-    Route::delete("/delete/{id}", [TaskController::class, "Task_Delete"])->where(["id" => "[0-9]+"]); // თასქის წაშლის მარშუტი
+    Route::delete("/delete/{id}", [TasksController::class, "Task_Delete"])->where(["id" => "[0-9]+"]); // თასქის წაშლის მარშუტი
 
-    Route::post("/by_status/{id}", [TaskController::class, "Task_By_Status"])->where(["id" => "[0-9]+"]); // თასქების წამოღების მარშუტი სტატუსების მიხედვით
+    Route::post("/by_status/{id}", [TasksController::class, "Task_By_Status"])->where(["id" => "[0-9]+"]); // თასქების წამოღების მარშუტი სტატუსების მიხედვით
 });
 
 ?>

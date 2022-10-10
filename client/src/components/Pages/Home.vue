@@ -67,7 +67,6 @@
                         <th>ვადა</th>
                         <th>პრიორიტეტი</th>
                         <th>სტატუსი</th>
-                        <th><button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#addTaskModal"><BIconPlus />დამატება</button></th>
                     </tr>
                 </thead>
             </table>
@@ -84,10 +83,6 @@
         components : {
             HeaderComponent,
         },
-
-        mounted() {
-            console.log(this.$store.state.role);
-        }
     }
 </script>
 

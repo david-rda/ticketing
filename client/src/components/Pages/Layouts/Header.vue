@@ -5,8 +5,13 @@
 
             <div class="collapse navbar-collapse" id="mynav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="/task/add">დავალების დამატება</router-link>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" style="text-decoration: none !important" data-bs-toggle="dropdown">დავალებები</a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><router-link to="/task/list" class="dropdown-item">ყველა დავალება</router-link></li>
+                            <li><router-link to="/task/add" class="dropdown-item">დავალების დამატება</router-link></li>
+                        </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -38,7 +43,7 @@
                 try {
                     await axios.post("http://localhost:8000/api/logout");
 
-                    window.localStorage.clear(); // სესიების გასუფთავება
+                    window.localStorage.clear(); // სთორიჯის გასუფთავება
 
                     this.$router.push("/login");
                 }catch(err) {
