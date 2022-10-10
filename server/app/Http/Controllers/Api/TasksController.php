@@ -18,7 +18,7 @@ class TasksController extends Controller implements ITasks
     /**
      * თასქის დამატების მეთოდი
      * @method POST
-     * @param AddTaskRequest $request
+     * @param AddTaskRequest
      * @return json
      * 
      * @OA\Post(
