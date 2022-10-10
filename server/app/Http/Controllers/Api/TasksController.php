@@ -53,13 +53,19 @@ class TasksController extends Controller implements ITasks
             $validated = $request->validated();
 
             if($validated) {
-                Task::create([
-                    "title" => $validated["title"],
-                    "description" => $validated["description"],
-                    "author_user_id" => Auth::user()->id,
-                    "priority_id" => $validated["priority"],
-                    "end_date" => $validated["end_date"]
-                ]);
+                DB::transaction(function() use($validated) {
+                    $create_task = Task::create([
+                        "title" => $validated["title"],
+                        "description" => $validated["description"],
+                        "author_user_id" => Auth::user()->id,
+                        "priority_id" => $validated["priority"],
+                        "end_date" => $validated["end_date"]
+                    ]);
+
+                    $id = $create_task->id;
+                });
+
+                DB::commit();
 
                 return response()->json([
                     "message" => "თასქი დამეტა"
