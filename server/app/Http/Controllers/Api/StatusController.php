@@ -7,6 +7,7 @@ use App\Http\Interfaces\IStatus; //სტატუსების ინტე�
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StatusAddRequest;
+use App\Http\Requests\EditStatusRequest;
 use App\Models\Status;
 
 class StatusController extends Controller
@@ -132,6 +133,66 @@ class StatusController extends Controller
                     "message" => "სტატუსი ვერ დაემატა"
                 ], 422);
             }
+        }
+    }
+
+    /**
+     * სტატუსის რედაქტირების მეთოდი
+     * @param int<id>
+     * @method PUT
+     * @return json
+     * 
+     * @OA\Put(
+     *     path="/api/status/edit/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"სტატუსების API"},
+     *     summary="სტატუსის რედაქტირების მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="სტატუსი დარედაქტირდა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="სტატუსი ვერ დარედაქტირდა",
+     *         response=422
+     *     ),
+     * 
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="სტატუსის აიდი",
+     *         required=true,
+     *         in="path",
+     *         
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     * 
+     *     @OA\RequestBody(
+     *         required = true,
+     * 
+     *         @OA\JsonContent(
+     *             @OA\Property(property="name", type="string", format="string")
+     *         )
+     *     )
+     * )
+     */
+    public function Edit_Status(EditStatusRequest $request, $id) {
+        $validated = $request->validated();
+
+        if($validated) {
+            Status::whereId($id)->update([
+                "name" => $validated["name"]
+            ]);
+
+            return response()->json([
+                "message" => "სტატუსი დარედაქტირდა"
+            ], 200);
+        }else {
+            return response()->json([
+                "message" => "სტატუსივერ  დარედაქტირდა"
+            ], 422);
         }
     }
 }

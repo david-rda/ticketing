@@ -187,6 +187,56 @@
                 }
             }
         },
+        "/api/status/edit/{id}": {
+            "put": {
+                "tags": [
+                    "სტატუსების API"
+                ],
+                "summary": "სტატუსის რედაქტირების მარშუტი",
+                "description": "სტატუსის რედაქტირების მეთოდი",
+                "operationId": "3b5defa25da3fd5c64e1bfac8a9f6909",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "სტატუსის აიდი",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "სტატუსი დარედაქტირდა"
+                    },
+                    "422": {
+                        "description": "სტატუსი ვერ დარედაქტირდა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/task/add": {
             "post": {
                 "tags": [
