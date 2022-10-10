@@ -300,6 +300,74 @@
                 ]
             }
         },
+        "/api/task/edit/{id}": {
+            "put": {
+                "tags": [
+                    "თასქების API"
+                ],
+                "summary": "თასქის რედაქტირების მარშუტი",
+                "description": "თასქის რედაქტირების მეთოდი",
+                "operationId": "0bc84a2a1270d79b550e8d7ec54a7e2e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "თასქის აიდი",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "priority",
+                                    "end_date"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "priority": {
+                                        "type": "number",
+                                        "format": "number"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "თასქი დარედაქტირდა"
+                    },
+                    "422": {
+                        "description": "თასქი ვერ დარედაქტირდა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/user/insert": {
             "post": {
                 "tags": [
@@ -356,6 +424,30 @@
                     },
                     "422": {
                         "description": "მომხმარებლები ვერ აიტვირთა"
+                    }
+                },
+                "security": [
+                    {
+                        "0": "bearerAuth",
+                        "1": []
+                    }
+                ]
+            }
+        },
+        "/api/user/list": {
+            "post": {
+                "tags": [
+                    "მომხმარებლების API"
+                ],
+                "summary": "მომხმარებელთა სიის გამოტანის მარშუტი",
+                "description": "მომხმარებელთა სიის გამოტანის მეტოდი",
+                "operationId": "b4c3d12a340f78efce99e41ded753d12",
+                "responses": {
+                    "200": {
+                        "description": "სია ჩაიტვირთა"
+                    },
+                    "422": {
+                        "description": "სია ვერ ჩაიტვირთა"
                     }
                 },
                 "security": [

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Interfaces\IUserInsert; // ინტერფეისი მომხმარებელთა კლასისთვის
+use App\Http\Interfaces\IUser; // ინტერფეისი მომხმარებელთა კლასისთვის
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Hash;
 use DB;
 use App\Models\User;
 
-class UserController extends Controller implements IUserInsert
+class UserController extends Controller implements IUser
 {
     /** 
      * მომხმარებელთა ატვირთვის მეთოდი
@@ -51,8 +51,7 @@ class UserController extends Controller implements IUserInsert
     */
     public function Insert_Users(Request $request) {
         DB::transaction(function() use($request) {
-            DB::statement("DELETE FROM users 
-                        DBCC CHECKIDENT ('RDA_TASKS.dbo.users', RESEED, 0)"); // მომხმარებელთა ცხრილის გასუფთავება
+            DB::statement("DELETE FROM users DBCC CHECKIDENT ('RDA_TASKS.dbo.users', RESEED, 0)"); // მომხმარებელთა ცხრილის გასუფთავება
             
             // მომხმარებელთა ატვირთვა ციკლის საშუალებით
             foreach($request->all() as $data) {
@@ -77,5 +76,32 @@ class UserController extends Controller implements IUserInsert
                 "message" => "თანამშრომლები ვერ აიტვირთა"
             ], 422);
         }
+    }
+
+    /** 
+     * მომხმარებელთა სიის გამოტანის მეტოდი
+     * @param Request
+     * @method GET
+     * @return json
+     * 
+     * @OA\Post(
+     *     path="/api/user/list",
+     *     tags={"მომხმარებლების API"},
+     *     security={{"bearerAuth", {}}},
+     *     summary="მომხმარებელთა სიის გამოტანის მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="სია ჩაიტვირთა",
+     *         response=200
+     *     ),
+     *     
+     *     @OA\Response(
+     *         description="სია ვერ ჩაიტვირთა",
+     *         response=422
+     *     )
+     * )
+    */
+    public function User_List() {
+        return User::where("role", 2)->get();
     }
 }

@@ -24,7 +24,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="description">აღწერა</label>
-                    <editor api-key="no-api-key" :init="{resize: false}" v-model="description"></editor>
+                    <editor :init="{resize: false}" v-model="description"></editor>
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"><BIconPlusCircleFill />&nbsp;პასუხისმგებელი</button>
                 </div>
                 <div class="mb-3 d-grid">
                     <button type="submit" class="btn btn-success">დამატება</button>
@@ -37,6 +40,26 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+        <div class="modal fade" id="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title">პასუხისმგებელ პირზე მიმაგრება</h6>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-unstyled" v-for="(user, index) in users" :key="index">
+                            <li>
+                                <label><input type="checkbox" ref="userid" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
+                            </li>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">დახურვა</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -60,27 +83,38 @@
 
                 priority_list : [],
                 created : "",
-                msg : ""
+                msg : "",
+                users : [],
+                
+                responsibles : []
             }
         },
 
         components : {
             HeaderComponent,
             Datepicker,
-            Editor
+            Editor,
         },
 
-        mounted() {
+        async mounted() {
             document.title = "თასქის დამატება";
             this.$store.commit("setToken");
             
-            axios.get("http://localhost:8000/api/priority/list", {
+            const data = await axios.get("http://localhost:8000/api/priority/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
-            }).then((response) => {
-                this.priority_list = response.data;
             });
+
+            this.priority_list = data.data;
+
+            const users_list = await axios.get("http://localhost:8000/api/user/list", {
+                headers : {
+                    "Authorization" : `Bearer ${this.$store.state.token}`
+                }
+            });
+
+            this.users = users_list.data;
         },
 
         methods : {
@@ -104,7 +138,7 @@
                         console.log("err");
                     }
                 }
-            }
+            },
         }
     }
 </script>
@@ -124,5 +158,10 @@
         background-color: #fff;
         padding: 20px;
         border-radius: 6px;
+    }
+
+    .modal-body {
+        max-height: 600px;
+        overflow-y: scroll;
     }
 </style>

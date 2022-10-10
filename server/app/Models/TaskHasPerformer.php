@@ -19,19 +19,9 @@ class TaskHasPerformer extends Model
         "task_id", "performer_id"
     ];
 
-    protected $appends = [
-        "performer_fullname"
-    ];
-
     public $timestamps = true;
 
     public function performers() {
         return $this->hasMany(User::class, "id", "performer_id");
-    }
-
-    public function performerFullname() : Attribute {
-        return Attribute::make(
-            get : fn() => $this->performers->name
-        );
     }
 }

@@ -12,7 +12,12 @@ use App\Http\Controllers\Api\StatusController;
 Route::post("/login", [AuthController::class, "Login"]);
 Route::post("/logout", [LogoutController::class, "Logout"]);
 
-Route::post("/insert", [UserController::class, "Insert_Users"]); // მომხმარებლების ატვირთვის მარშუტი
+Route::group(["prefix" => "user", "middleware" => "auth:api"], function() {
+    Route::post("/insert", [UserController::class, "Insert_Users"]); // მომხმარებლების ატვირთვის მარშუტი
+
+    Route::get("/list", [UserController::class, "User_List"]);
+});
+
 
 Route::group(["prefix" => "priority", "middleware" => "auth:api"], function() {
     Route::get("/list", [PriorityController::class, "Priority_List"]); // პრიორიტეტების სიის წამოღების მარშუტი
