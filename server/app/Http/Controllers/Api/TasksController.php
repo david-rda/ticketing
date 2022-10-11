@@ -230,6 +230,7 @@ class TasksController extends Controller implements ITasks
         $tasks = Task::join("task_has_performers", "tasks.id", "=", "task_has_performers.task_id")
                         ->join("users", "users.id", "=", "task_has_performers.performer_id")
                         ->where("task_has_performers.performer_id", Auth::id())
+                        ->orderBy("created_at", "DESC")
                         ->get();
 
         return $tasks;
