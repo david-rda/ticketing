@@ -6,8 +6,10 @@ use App\Http\Interfaces\IUser; // ინტერფეისი მომხმ
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\PasswordChangeRequest;
 use Hash;
 use DB;
+use Auth;
 use App\Models\User;
 
 class UserController extends Controller implements IUser
@@ -103,5 +105,54 @@ class UserController extends Controller implements IUser
     */
     public function User_List() {
         return User::where("role", 2)->get();
+    }
+
+    /**
+     * პაროლის ცვლილების მეთოდი
+     * @param PasswordChangeRequest $request
+     * @method PUT
+     * @return json
+     * 
+     * @OA\Put(
+     *     path="/api/user/password/change",
+     *     tags={"მომხმარებლების API"},
+     *     security={{"bearerAuth", {}}},
+     *     summary="პაროლის ცვლილების მარშუტი",
+     * 
+     *     @OA\RequestBody(
+     *         required = true,
+     * 
+     *         @OA\JsonContent(
+     *             required = {"current_password", "new_password"},
+     *             
+     *             @OA\Property(property="current_password", type="string", format="string"),
+     *             @OA\Property(property="new_password", type="string", format="string"),
+     *         )
+     *     )
+     * )
+     */
+    public function Change_Password(PasswordChangeRequest $request) {
+        $validated = $request->validated();
+        $current_password = Auth::user()->password;
+
+        if(Auth::check()) {
+            if($validated) {
+                if(Hash::check($validated["current_password"], $current_password)) {
+                    try {
+                        $user = Auth::user();
+                        $user->password = Hash::check($validated["new_password"]);
+                        $user->save();
+
+                        return response()->json([
+                            "message" => "პაროლი დარედაქტირდა"
+                        ], 200);
+                    }catch(Exception $e) {
+                        return response()->json([
+                            "message" => "პაროლი ვერ დარედაქტირდა"
+                        ], 422);
+                    }
+                }
+            }
+        }
     }
 }

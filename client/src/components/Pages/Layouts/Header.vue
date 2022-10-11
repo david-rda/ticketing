@@ -7,6 +7,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a href="#" class="dropdown-toggle" role="button" style="text-decoration: none !important" data-bs-toggle="dropdown">დავალებები</a>
+                        <router-link class="link" to="/profile/manage">პროფილის მართვა</router-link>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><router-link to="/task/list" class="dropdown-item">ყველა დავალება</router-link></li>
@@ -72,5 +73,23 @@
     .icon-header {
         width: 20px;
         height: 20px;
+    }
+
+    .link {
+        color: #202020;
+        text-decoration: none;
+        margin-left: 20px;
+
+        &:hover {
+            color: gray;
+        }
+    }
+
+    .dropdown-toggle {
+        color: #202020;
+
+        &:hover {
+            color: gray;
+        }
     }
 </style>
