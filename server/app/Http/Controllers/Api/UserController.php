@@ -145,23 +145,19 @@ class UserController extends Controller implements IUser
         $validated = $request->validated();
         $current_password = Auth::user()->password;
 
-        if(Auth::check()) {
-            if($validated) {
-                if(Hash::check($validated["new_password"], $current_password)) {
-                    try {
-                        $user = Auth::user();
-                        $user->password = Hash::check($validated["new_password"]);
-                        $user->save();
+        if($validated) {
+            if(Hash::check($validated["current_password"], $current_password)) {
+                $user = Auth::user();
+                $user->password = Hash::make($validated["new_password"]);
+                $user->save();
 
-                        return response()->json([
-                            "message" => "პაროლი შეიცვალა"
-                        ], 200);
-                    }catch(Exception $e) {
-                        return response()->json([
-                            "message" => "პაროლი ვერ შეიცვალა"
-                        ], 422);
-                    }
-                }
+                return response()->json([
+                    "message" => "პაროლი შეიცვალა"
+                ], 200);
+            }else {
+                return response()->json([
+                    "message" => "პაროლი ვერ შეიცვალა"
+                ], 422);
             }
         }
     }
