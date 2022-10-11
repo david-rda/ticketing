@@ -634,5 +634,26 @@
                 ]
             }
         }
+    },
+    "components": {
+        "responses": {
+            "200": {
+                "description": "მოინიშნა"
+            },
+            "422": {
+                "description": "ვერ მოინიშნა"
+            }
+        },
+        "parameters": {
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "თასქის აიდი",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        }
     }
 }

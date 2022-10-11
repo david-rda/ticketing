@@ -42,7 +42,9 @@ Route::group(["prefix" => "task", "middleware" => "auth:api"], function() {
 
     Route::delete("/delete/{id}", [TasksController::class, "Task_Delete"])->where(["id" => "[0-9]+"]); // თასქის წაშლის მარშუტი
 
-    Route::get("/list", [TasksController::class, "Task_List"]); // თასქების სიის მარსუტი
+    Route::get("/list", [TasksController::class, "Task_List"]); // თასქების სიის მარშუტი
+
+    Route::put("/mark/{id}", [TasksController::class, "Mark_Task_As_Done"])->where(["id" => "[0-9]+"]); // თასქების შესრულებულად მონიშვნის მარშუტი
 });
 
 ?>

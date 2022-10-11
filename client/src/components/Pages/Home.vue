@@ -69,10 +69,11 @@
                         <th>სტატუსი</th>
                     </tr>
                 </thead>
-                <tbody v-for="data in tasks" :key="data.id">
-                    <tr>
+                <tbody>
+                    <tr v-for="data in tasks" :key="data.task_id">
                         <td>
-                            {{ data.title }}
+                            <button type="button" v-bind:class="data.status_id == 4 ? 'btn btn-success' : 'btn btn-secondary' " @click="markAs($event)" ref="mark" :data-task-id="data.task_id"><BIconCheckCircleFill class="pointer" /></button>
+                            <span>&nbsp;&nbsp;&nbsp;{{ data.title }}</span>
                         </td>
                         <td>
                             <span v-html="data.description"></span>
@@ -81,7 +82,7 @@
                             {{ data.end_date }}
                         </td>
                         <td>
-                            {{ data.priority }}
+                            {{ data.priority_id }}
                         </td>
                     </tr>
                 </tbody>
@@ -108,6 +109,7 @@
         },
 
         async mounted() {
+            document.title = "მთავარი";
             this.$store.commit("setToken");
 
             const load_tasks = await axios.get("http://localhost:8000/api/task/list", {
@@ -117,6 +119,26 @@
             });
 
             this.tasks = load_tasks.data;
+        },
+
+        methods : {
+            async markAs(e) {
+                let id = e.target.getAttribute("data-task-id");
+
+                await axios.put("http://localhost:8000/api/task/mark/" + id, {}, {
+                    headers : {
+                        "Authorization" : `Bearer ${this.$store.state.token}`
+                    }
+                });
+
+                const load_tasks = await axios.get("http://localhost:8000/api/task/list", {
+                    headers : {
+                        "Authorization" : `Bearer ${this.$store.state.token}`
+                    }
+                });
+
+                this.tasks = load_tasks.data;
+            }
         }
     }
 </script>
@@ -128,5 +150,9 @@
 
     table {
         font-size: 14px;
+    }
+
+    .pointer {
+        pointer-events: none;
     }
 </style>

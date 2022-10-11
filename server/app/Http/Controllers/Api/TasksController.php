@@ -234,4 +234,52 @@ class TasksController extends Controller implements ITasks
 
         return $tasks;
     }
+
+    /**
+     * თასქის შესრულებულად მონიშვნის მეთოდი
+     * @param int $id
+     * @return json
+     * @method PUT
+     * 
+     *     path="/api/task/mark/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"თასქების API"},
+     *     summary="თასქის შესრულებულად მონიშვნის მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="მოინიშნა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="ვერ მოინიშნა",
+     *         response=422
+     *     ),
+     * 
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="თასქის აიდი",
+     *         required=true,
+     *         in="path",
+     *         
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     */
+    public function Mark_Task_As_Done(int $id) {
+        try {
+            Task::whereId($id)->update([
+                "status_id" => 4
+            ]);
+
+            return response()->json([
+                "message" => "მოინიშნა"
+            ], 200);
+        }catch(Exception $e) {
+            return response()->json([
+                "message" => "ვერ მოინიშნა"
+            ], 422);
+        }
+    }
 }
