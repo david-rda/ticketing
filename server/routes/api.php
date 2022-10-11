@@ -41,8 +41,6 @@ Route::group(["prefix" => "task", "middleware" => "auth:api"], function() {
     Route::post("/add", [TasksController::class, "Add_Task"]); // სტატუსების სიის წამოღების მარშუტი
 
     Route::delete("/delete/{id}", [TasksController::class, "Task_Delete"])->where(["id" => "[0-9]+"]); // თასქის წაშლის მარშუტი
-
-    Route::get("/list", [TasksController::class, "Task_List"]); // თასქების სიის მარსუტი
 });
 
 ?>
