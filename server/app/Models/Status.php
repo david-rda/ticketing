@@ -15,7 +15,7 @@ class Status extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        "name"
+        "name", "task_id"
     ];
 
     protected $dates = [

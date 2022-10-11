@@ -62,7 +62,7 @@ class TasksController extends Controller implements ITasks
                         "end_date" => $validated["end_date"]
                     ]);
 
-                    $id = $create_task->id;
+                    $id = $create_task->id; // ახლად დამატებული თასქის აიდი
 
                     foreach($request->users as $users) {
                         TaskHasPerformer::insert([

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Status;
 
 class Task extends Model
 {
@@ -29,6 +30,10 @@ class Task extends Model
     ];
 
     public $timestamps = true;
+
+    public function status() {
+        return $this->hasOne(Status::class, "id", "status_id");
+    }
 }
 
 ?>
