@@ -203,36 +203,4 @@ class TasksController extends Controller implements ITasks
             }
         }
     }
-
-    /**
-     * დავალებების წამოღების მეთოდი
-     * @method GET,
-     * @return json
-     * 
-     * @OA\Get(
-     *     path="/api/task/list",
-     *     security={{ "bearerAuth": {} }},
-     *     tags={"თასქების API"},
-     *     summary="დავალებების წამოღების მარშუტი",
-     *     
-     *     @OA\Response(
-     *         description="დავალებები ჩაიტვირთა",
-     *         response=200
-     *     ),
-     * 
-     *     @OA\Response(
-     *         description="დავალებები ვერ ჩაიტვირთა",
-     *         response=422
-     *     )
-     * )
-     */
-    public function Task_List() {
-        $tasks = Task::join("task_has_performers", "tasks.id", "=", "task_has_performers.task_id")
-                    ->join("users", "users.id", "=", "task_has_performers.performer_id")
-                    ->where("task_has_performers.performer_id", Auth::id())
-                    ->get()
-                    ->makeHidden(["password"]);
-
-        return $tasks;
-    }
 }
