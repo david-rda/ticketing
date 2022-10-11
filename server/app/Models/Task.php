@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Status;
+use App\Models\Comment;
 
 class Task extends Model
 {
@@ -33,6 +34,16 @@ class Task extends Model
 
     public function status() {
         return $this->hasOne(Status::class, "id", "status_id");
+    }
+
+    public function comment() {
+        return $this->hasMany(Comment::class, "task_id", "id");
+    }
+
+    public function endDate() : Attribute {
+        return Attribute::make(
+            get : fn($value) => $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("Y/m/d")
+        );
     }
 }
 
