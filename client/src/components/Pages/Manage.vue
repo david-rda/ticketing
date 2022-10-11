@@ -24,7 +24,7 @@
 
 <script>
     import HeaderComponent from "./Layouts/Header.vue";
-    import axios from "axios";
+    import axios, { AxiosError } from "axios";
 
     export default {
         name : "ManageProfile",
@@ -47,16 +47,23 @@
 
         methods : {
             async change_password() {
-                const change = await axios.put("http://localhost:8000/api/user/password/change", {
-                    current_password : this.current_password,
-                    new_password : this.new_password
-                }, {
-                    headers : {
-                        "Authorization" : `Bearer ${this.$store.state.token}`
-                    }
-                });
+                try {
+                    await axios.put("http://localhost:8000/api/user/password/change", {
+                        current_password : this.current_password,
+                        new_password : this.new_password
+                    }, {
+                        headers : {
+                            "Authorization" : `Bearer ${this.$store.state.token}`
+                        }
+                    });
 
-                console.log(change);
+                    this.current_password = "";
+                    this.new_password = "";
+                }catch(err) {
+                    if(err instanceof AxiosError) {
+                        console.log(err);
+                    }
+                }
             }
         }
     }

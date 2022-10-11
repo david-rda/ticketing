@@ -9,7 +9,7 @@
                         <h5 class="card-title">შემოსული</h5>
                     </div>
                     <div class="card-body text-center">
-                        <h1>120</h1>
+                        <h1>{{ new_tasks_count }}</h1>
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@
         </div>
 
         <div class="container-fluid bg-white mt-5">
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>დასახელება</th>
@@ -70,12 +70,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="data in tasks" :key="data.task_id">
+                    <tr v-for="data in tasks.tasks" :key="data.task_id">
                         <td>
                             <button type="button" v-bind:class="data.status_id == 4 ? 'btn btn-success' : 'btn btn-secondary' " @click="markAs($event)" ref="mark" :data-task-id="data.task_id"><BIconCheckCircleFill class="pointer" /></button>
                             <span>&nbsp;&nbsp;&nbsp;{{ data.title }}</span>
                         </td>
-                        <td class="desc">
+                        <td>
                             <span v-html="data.description"></span>
                         </td>
                         <td>
@@ -100,7 +100,8 @@
 
         data() {
             return {
-                tasks : []
+                tasks : [],
+                new_tasks_count : 0
             }
         },
 
@@ -119,6 +120,7 @@
             });
 
             this.tasks = load_tasks.data;
+            this.new_tasks_count = load_tasks.data.count;
         },
 
         methods : {
@@ -186,15 +188,13 @@
         pointer-events: none;
     }
 
-    .desc {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
     .btn {
         border-radius: 100%;
         width: 50px;
         height: 50px;
+    }
+
+    body {
+        margin: 10px;
     }
 </style>

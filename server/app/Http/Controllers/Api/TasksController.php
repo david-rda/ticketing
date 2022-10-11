@@ -233,7 +233,10 @@ class TasksController extends Controller implements ITasks
                         ->orderBy("created_at", "DESC")
                         ->get();
 
-        return $tasks;
+        return response()->json([
+            "tasks" => $tasks,
+            "count" => $tasks->count()
+        ], 200);
     }
 
     /**
