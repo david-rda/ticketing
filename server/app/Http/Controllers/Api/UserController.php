@@ -119,6 +119,16 @@ class UserController extends Controller implements IUser
      *     security={{"bearerAuth", {}}},
      *     summary="პაროლის ცვლილების მარშუტი",
      * 
+     *     @OA\Response(
+     *         description="პაროლი შეიცვალა",
+     *         response=200
+     *     ),
+     *     
+     *     @OA\Response(
+     *         description="პაროლი ვერ შეიცვალა",
+     *         response=422
+     *     ),
+     * 
      *     @OA\RequestBody(
      *         required = true,
      * 
@@ -137,18 +147,18 @@ class UserController extends Controller implements IUser
 
         if(Auth::check()) {
             if($validated) {
-                if(Hash::check($validated["current_password"], $current_password)) {
+                if(Hash::check($validated["new_password"], $current_password)) {
                     try {
                         $user = Auth::user();
                         $user->password = Hash::check($validated["new_password"]);
                         $user->save();
 
                         return response()->json([
-                            "message" => "პაროლი დარედაქტირდა"
+                            "message" => "პაროლი შეიცვალა"
                         ], 200);
                     }catch(Exception $e) {
                         return response()->json([
-                            "message" => "პაროლი ვერ დარედაქტირდა"
+                            "message" => "პაროლი ვერ შეიცვალა"
                         ], 422);
                     }
                 }
