@@ -58,17 +58,33 @@
             </div>
         </div>
 
-        <div class="container bg-white mt-5">
-            <table class="table table-hover">
-                <thead class="text-center">
+        <div class="container-fluid bg-white mt-5">
+            <table class="table">
+                <thead>
                     <tr>
                         <th>დასახელება</th>
-                        <th>შემსრულებლები</th>
+                        <th>აღწერა</th>
                         <th>ვადა</th>
                         <th>პრიორიტეტი</th>
                         <th>სტატუსი</th>
                     </tr>
                 </thead>
+                <tbody v-for="data in tasks" :key="data.id">
+                    <tr>
+                        <td>
+                            {{ data.title }}
+                        </td>
+                        <td>
+                            <span v-html="data.description"></span>
+                        </td>
+                        <td>
+                            {{ data.end_date }}
+                        </td>
+                        <td>
+                            {{ data.priority }}
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -76,18 +92,41 @@
 
 <script>
     import HeaderComponent from "./Layouts/Header.vue";
+    import axios from "axios";
 
     export default {
         name : "HomeComponent",
 
+        data() {
+            return {
+                tasks : []
+            }
+        },
+
         components : {
             HeaderComponent,
         },
+
+        async mounted() {
+            this.$store.commit("setToken");
+
+            const load_tasks = await axios.get("http://localhost:8000/api/task/list", {
+                headers : {
+                    "Authorization" : `Bearer ${this.$store.state.token}`
+                }
+            });
+
+            this.tasks = load_tasks.data;
+        }
     }
 </script>
 
 <style lang="scss" scoped>
     .card {
         margin-left: 50px !important;
+    }
+
+    table {
+        font-size: 14px;
     }
 </style>
