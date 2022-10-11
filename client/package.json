@@ -27,7 +27,6 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "sass-loader": "^13.0.2",
-    "vue-laravel-csrf": "^1.0.0",
     "vue-router": "^4.1.5",
     "vuex": "^4.0.2"
   },

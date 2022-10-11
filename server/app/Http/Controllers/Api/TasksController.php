@@ -24,6 +24,7 @@ class TasksController extends Controller implements ITasks
      * @OA\Post(
      *     path="/api/task/add",
      *     tags={"თასქების API"},
+     *     security={{"bearerAuth", {}}},
      *     summary="თასქის დამატების მარსუტი",
      * 
      *     @OA\Response(
@@ -62,7 +63,7 @@ class TasksController extends Controller implements ITasks
                         "end_date" => $validated["end_date"]
                     ]);
 
-                    $id = $create_task->id;
+                    $id = $create_task->id; // ახლად დამატებული თასქის აიდი
 
                     foreach($request->users as $users) {
                         TaskHasPerformer::insert([
@@ -200,6 +201,89 @@ class TasksController extends Controller implements ITasks
                     "message" => "თასქი ვერ დარედაქტირდა"
                 ], 422);
             }
+        }
+    }
+
+    /**
+     * დავალებების წამოღების მეთოდი
+     * @method GET,
+     * @return json
+     * 
+     * @OA\Get(
+     *     path="/api/task/list",
+     *     security={{ "bearerAuth": {} }},
+     *     tags={"თასქების API"},
+     *     summary="დავალებების წამოღების მარშუტი",
+     *     
+     *     @OA\Response(
+     *         description="დავალებები ჩაიტვირთა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="დავალებები ვერ ჩაიტვირთა",
+     *         response=422
+     *     )
+     * )
+     */
+    public function Task_List() {
+        $tasks = Task::join("task_has_performers", "tasks.id", "=", "task_has_performers.task_id")
+                        ->join("users", "users.id", "=", "task_has_performers.performer_id")
+                        ->where("task_has_performers.performer_id", Auth::id())
+                        ->orderBy("created_at", "DESC")
+                        ->get();
+
+        return response()->json([
+            "tasks" => $tasks,
+            "count" => $tasks->count()
+        ], 200);
+    }
+
+    /**
+     * თასქის შესრულებულად მონიშვნის მეთოდი
+     * @param int $id
+     * @return json
+     * @method PUT
+     * 
+     *     path="/api/task/mark/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"თასქების API"},
+     *     summary="თასქის შესრულებულად მონიშვნის მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="მოინიშნა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="ვერ მოინიშნა",
+     *         response=422
+     *     ),
+     * 
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="თასქის აიდი",
+     *         required=true,
+     *         in="path",
+     *         
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     */
+    public function Mark_Task_As_Done(int $id) {
+        try {
+            Task::whereId($id)->update([
+                "status_id" => 4
+            ]);
+
+            return response()->json([
+                "message" => "მოინიშნა"
+            ], 200);
+        }catch(Exception $e) {
+            return response()->json([
+                "message" => "ვერ მოინიშნა"
+            ], 422);
         }
     }
 }

@@ -15,7 +15,9 @@ Route::post("/logout", [LogoutController::class, "Logout"]);
 Route::group(["prefix" => "user", "middleware" => "auth:api"], function() {
     Route::post("/insert", [UserController::class, "Insert_Users"]); // მომხმარებლების ატვირთვის მარშუტი
 
-    Route::get("/list", [UserController::class, "User_List"]);
+    Route::get("/list", [UserController::class, "User_List"]); // მომხმარებლის სიის წამოღების მარშუტი
+
+    Route::put("/password/change", [UserController::class, "Change_Password"]); // პაროლის ცვლილების მარშუტი
 });
 
 
@@ -40,7 +42,9 @@ Route::group(["prefix" => "task", "middleware" => "auth:api"], function() {
 
     Route::delete("/delete/{id}", [TasksController::class, "Task_Delete"])->where(["id" => "[0-9]+"]); // თასქის წაშლის მარშუტი
 
-    Route::post("/by_status/{id}", [TasksController::class, "Task_By_Status"])->where(["id" => "[0-9]+"]); // თასქების წამოღების მარშუტი სტატუსების მიხედვით
+    Route::get("/list", [TasksController::class, "Task_List"]); // თასქების სიის მარშუტი
+
+    Route::put("/mark/{id}", [TasksController::class, "Mark_Task_As_Done"])->where(["id" => "[0-9]+"]); // თასქების შესრულებულად მონიშვნის მარშუტი
 });
 
 ?>

@@ -4,23 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Task;
 
-class Status extends Model
+class Comment extends Model
 {
     use HasFactory;
 
-    protected $table = "statuses";
+    protected $table = "comments";
 
     protected $primaryKey = "id";
 
     protected $fillable = [
-        "name", "task_id"
-    ];
-
-    protected $dates = [
-        "deleted_at"
+        "task_id", "comment"
     ];
 
     public $timestamps = true;
+
+    public function tasks() {
+        return $this->belongsTo(Task::class, "task_id", "id");
+    }
 }

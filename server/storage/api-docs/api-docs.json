@@ -95,7 +95,13 @@
                     "422": {
                         "description": "პრიორიტეტი ვერ დაემატა"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "0": "bearerAuth",
+                        "1": []
+                    }
+                ]
             }
         },
         "/api/priority/edit/{id}": {
@@ -232,7 +238,13 @@
                     "422": {
                         "description": "სტატუსი ვერ დაემატა"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "0": "bearerAuth",
+                        "1": []
+                    }
+                ]
             }
         },
         "/api/status/edit/{id}": {
@@ -328,7 +340,13 @@
                     "422": {
                         "description": "თასქი ვერ დაემატა"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "0": "bearerAuth",
+                        "1": []
+                    }
+                ]
             }
         },
         "/api/task/delete/{id}": {
@@ -433,6 +451,29 @@
                 ]
             }
         },
+        "/api/task/list": {
+            "get": {
+                "tags": [
+                    "თასქების API"
+                ],
+                "summary": "დავალებების წამოღების მარშუტი",
+                "description": "დავალებების წამოღების მეთოდი",
+                "operationId": "8db52b0749016504eac3696189831795",
+                "responses": {
+                    "200": {
+                        "description": "დავალებები ჩაიტვირთა"
+                    },
+                    "422": {
+                        "description": "დავალებები ვერ ჩაიტვირთა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/user/insert": {
             "post": {
                 "tags": [
@@ -523,6 +564,54 @@
                 ]
             }
         },
+        "/api/user/password/change": {
+            "put": {
+                "tags": [
+                    "მომხმარებლების API"
+                ],
+                "summary": "პაროლის ცვლილების მარშუტი",
+                "description": "პაროლის ცვლილების მეთოდი",
+                "operationId": "3691ebbf9bbd2d1b75dcf62ef5e74479",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "current_password",
+                                    "new_password"
+                                ],
+                                "properties": {
+                                    "current_password": {
+                                        "type": "string",
+                                        "format": "string"
+                                    },
+                                    "new_password": {
+                                        "type": "string",
+                                        "format": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "პაროლი შეიცვალა"
+                    },
+                    "422": {
+                        "description": "პაროლი ვერ შეიცვალა"
+                    }
+                },
+                "security": [
+                    {
+                        "0": "bearerAuth",
+                        "1": []
+                    }
+                ]
+            }
+        },
         "/api/login": {
             "post": {
                 "tags": [
@@ -591,6 +680,27 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "200": {
+                "description": "მოინიშნა"
+            },
+            "422": {
+                "description": "ვერ მოინიშნა"
+            }
+        },
+        "parameters": {
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "თასქის აიდი",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
             }
         }
     }
