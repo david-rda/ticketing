@@ -72,7 +72,7 @@
                 <tbody>
                     <tr v-for="data in tasks.tasks" :key="data.task_id">
                         <td>
-                            <button type="button" v-bind:class="data.status_id == 4 ? 'btn btn-success' : 'btn btn-secondary' " @click="markAs($event)" ref="mark" :data-task-id="data.task_id"><BIconCheckCircleFill class="pointer" /></button>
+                            <button type="button" v-bind:class="data.status_id == 4 ? 'btn btn-success' : 'btn btn-secondary' " @click="markAs($event)" ref="mark" :data-task-id="data.task_id"><BIconCheck2 class="pointer" /></button>
                             <span>&nbsp;&nbsp;&nbsp;{{ data.title }}</span>
                         </td>
                         <td>
