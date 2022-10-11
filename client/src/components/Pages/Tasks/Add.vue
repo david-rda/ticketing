@@ -2,7 +2,7 @@
     <div>
         <HeaderComponent />
 
-        <div class="container mt-5 custom-container">
+        <div class="container mt-5 custom-container bg-white">
             <form method="POST" @submit.prevent="add_task()">
                 <div class="mb-3">
                     <label for="title">სათაური</label>
@@ -93,7 +93,7 @@
         components : {
             HeaderComponent,
             Datepicker,
-            Editor,
+            Editor
         },
 
         async mounted() {
@@ -156,7 +156,6 @@
     }
 
     .custom-container {
-        background-color: #fff;
         padding: 20px;
         border-radius: 6px;
     }

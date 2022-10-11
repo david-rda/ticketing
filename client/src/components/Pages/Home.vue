@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="container-fluid bg-white mt-5">
+        <div class="container bg-white mt-5">
             <table class="table table-hover">
                 <thead class="text-center">
                     <tr>
