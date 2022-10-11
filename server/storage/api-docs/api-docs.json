@@ -335,39 +335,6 @@
                 ]
             }
         },
-        "/api/task/by_status/{id}": {
-            "get": {
-                "tags": [
-                    "თასქების API"
-                ],
-                "summary": "თასქის წამოღების მარშუტი სტატუსის აიდის მიხედვით",
-                "operationId": "c4bd24be55714d29ce612df0e4ce3a2c",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "სტატუსის აიდი",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "422": {
-                        "description": "Unprocessable content"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
         "/api/task/edit/{id}": {
             "put": {
                 "tags": [
@@ -427,6 +394,29 @@
                     },
                     "422": {
                         "description": "თასქი ვერ დარედაქტირდა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/task/list": {
+            "get": {
+                "tags": [
+                    "თასქების API"
+                ],
+                "summary": "დავალებების წამოღების მარშუტი",
+                "description": "დავალებების წამოღების მეთოდი",
+                "operationId": "8db52b0749016504eac3696189831795",
+                "responses": {
+                    "200": {
+                        "description": "დავალებები ჩაიტვირთა"
+                    },
+                    "422": {
+                        "description": "დავალებები ვერ ჩაიტვირთა"
                     }
                 },
                 "security": [

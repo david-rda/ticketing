@@ -211,7 +211,7 @@ class TasksController extends Controller implements ITasks
      * 
      * @OA\Get(
      *     path="/api/task/list",
-     *     security="{{ "bearerAuth": {} }}",
+     *     security={{ "bearerAuth": {} }},
      *     tags={"თასქების API"},
      *     summary="დავალებების წამოღების მარშუტი",
      *     
@@ -229,7 +229,9 @@ class TasksController extends Controller implements ITasks
     public function Task_List() {
         $tasks = Task::join("task_has_performers", "tasks.id", "=", "task_has_performers.task_id")
                     ->join("users", "users.id", "=", "task_has_performers.performer_id")
-                    ->where("task_has_performers.performer_id", Auth::id())->get();
+                    ->where("task_has_performers.performer_id", Auth::id())
+                    ->get()
+                    ->makeHidden(["password"]);
 
         return $tasks;
     }
