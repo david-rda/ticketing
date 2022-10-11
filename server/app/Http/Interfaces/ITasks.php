@@ -10,8 +10,8 @@
 
         public function Task_Delete(int $id); // თასქის წაშლის მეთოდი
 
-        public function Task_By_Status(int $status_id); // თასქის სია სტატუსების მიხედვით
-
         public function Edit_Task(EditTaskRequest $request, int $id); // თასქის რედაქტირების მეთოდი
+
+        public function Task_List(); // დავალებების წამოღების მეთოდი
     }
 ?>

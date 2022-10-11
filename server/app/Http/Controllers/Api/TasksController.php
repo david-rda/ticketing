@@ -135,43 +135,6 @@ class TasksController extends Controller implements ITasks
     }
 
     /**
-     * @param int<id>
-     * @method GET
-     * @return json
-     * 
-     * @OA\Get(
-     *     path="/api/task/by_status/{id}",
-     *     security={{"bearerAuth":{}}},
-     *     tags={"თასქების API"},
-     *     summary="თასქის წამოღების მარშუტი სტატუსის აიდის მიხედვით",
-     * 
-     *     @OA\Response(
-     *         description="OK",
-     *         response=200
-     *     ),
-     * 
-     *     @OA\Response(
-     *         description="Unprocessable content",
-     *         response=422
-     *     ),
-     * 
-     *     @OA\Parameter(
-     *         name="id",
-     *         description="სტატუსის აიდი",
-     *         required=true,
-     *         in="path",
-     *         
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
-     *     )
-     * )
-     */
-    public function Task_By_Status(int $status_id) {
-        return Status::where("status_id", $status_id)->get();
-    }
-
-    /**
      * თასქის რედაქტირების მეთოდი
      * @param int<id>, Request
      * @method PUT
@@ -239,5 +202,35 @@ class TasksController extends Controller implements ITasks
                 ], 422);
             }
         }
+    }
+
+    /**
+     * დავალებების წამოღების მეთოდი
+     * @method GET,
+     * @return json
+     * 
+     * @OA\Get(
+     *     path="/api/task/list",
+     *     security="{{ "bearerAuth": {} }}",
+     *     tags={"თასქების API"},
+     *     summary="დავალებების წამოღების მარშუტი",
+     *     
+     *     @OA\Response(
+     *         description="დავალებები ჩაიტვირთა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="დავალებები ვერ ჩაიტვირთა",
+     *         response=422
+     *     )
+     * )
+     */
+    public function Task_List() {
+        $tasks = Task::join("task_has_performers", "tasks.id", "=", "task_has_performers.task_id")
+                    ->join("users", "users.id", "=", "task_has_performers.performer_id")
+                    ->where("task_has_performers.performer_id", Auth::id())->get();
+
+        return $tasks;
     }
 }
