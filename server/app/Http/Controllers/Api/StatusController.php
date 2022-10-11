@@ -94,6 +94,7 @@ class StatusController extends Controller
      * @OA\Post(
      *     path="/api/status/add",
      *     tags={"სტატუსების API"},
+     *     security={{"bearerAuth", {}}},
      *     summary="სტატუსების დამატების მარშუტი",
      * 
      *     @OA\Response(

@@ -93,6 +93,7 @@ class PriorityController extends Controller implements IPriority
      * @OA\Post(
      *     path="/api/priority/add",
      *     tags={"პრიორიტეტების API"},
+     *     security={{"bearerAuth", {}}},
      *     summary="პრიორიტეტის დამატების მარსუტი",
      * 
      *     @OA\Response(

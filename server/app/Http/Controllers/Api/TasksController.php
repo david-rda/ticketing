@@ -24,6 +24,7 @@ class TasksController extends Controller implements ITasks
      * @OA\Post(
      *     path="/api/task/add",
      *     tags={"თასქების API"},
+     *     security={{"bearerAuth", {}}},
      *     summary="თასქის დამატების მარსუტი",
      * 
      *     @OA\Response(
