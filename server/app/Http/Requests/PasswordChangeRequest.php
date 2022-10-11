@@ -25,7 +25,7 @@ class PasswordChangeRequest extends FormRequest
     {
         return [
             "current_password" => "required",
-            "new_password" => "required|same:current_password"
+            "new_password" => "required"
         ];
     }
 
@@ -33,7 +33,6 @@ class PasswordChangeRequest extends FormRequest
         return [
             "current_password.required" => "შეიყვანეთ მიმდინარე პაროლი",
             "new_password.required" => "შეიყვანეთ ახალი პაროლი",
-            "new_password.same" => "პაროლები არ ემთხვევა ერთმანეთს"
         ];
     }
 }
