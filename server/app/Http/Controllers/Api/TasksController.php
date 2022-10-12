@@ -123,6 +123,7 @@ class TasksController extends Controller implements ITasks
     public function Task_Delete(int $id) {
         try {
             $delete_task = Task::whereId($id)->delete();
+            TaskHasPerformer::where("task_id", $id)->delete();
 
             return response()->json([
                 "message" => "თასქი წაიშალა"
@@ -255,11 +256,12 @@ class TasksController extends Controller implements ITasks
      * @return json
      * @method PUT
      * 
-     *     path="/api/task/mark/{id}",
-     *     security={{"bearerAuth":{}}},
-     *     tags={"თასქების API"},
-     *     summary="თასქის შესრულებულად მონიშვნის მარშუტი",
+     * path="/api/task/mark/{id}",
+     * security={{"bearerAuth":{}}},
+     * tags={"თასქების API"},
+     * summary="თასქის შესრულებულად მონიშვნის მარშუტი",
      * 
+     * @OA\GPut
      *     @OA\Response(
      *         description="მოინიშნა",
      *         response=200
@@ -280,6 +282,7 @@ class TasksController extends Controller implements ITasks
      *             type="integer"
      *         )
      *     )
+     * )
      */
     public function Mark_Task_As_Done(int $id) {
         try {
