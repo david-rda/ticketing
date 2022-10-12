@@ -14,23 +14,13 @@
     @import "assets/css/variables.scss";
 
     @font-face {
-        font-family: "neue_regular";
-        src : url("assets/fonts/NeueFrutigerGeorgianCAPS-Regular.ttf")
+        font-family: "firago_regular";
+        src : url("assets/fonts/FiraGO-Regular.ttf")
     }
 
     @font-face {
-        font-family: "neue_bold";
-        src: url("assets/fonts/NeueFrutigerGeorgianCAPS-Bold.ttf");
-    }
-
-    @font-face {
-        font-family: "neue_black";
-        src: url("assets/fonts/NeueFrutigerGeorgianCAPS-Black.ttf");
-    }
-
-    @font-face {
-        font-family: "neue_light";
-        src: url("assets/fonts/NeueFrutigerGeorgianCAPS-Light.ttf");
+        font-family: "firago_bold";
+        src: url("assets/fonts/FiraGO-Bold.ttf");
     }
 
     html, body {
@@ -42,6 +32,6 @@
 
     * {
         box-sizing: border-box !important;
-        //font-family: "neue_bold";
+        font-family: "firago_regular" !important;
     }
 </style>

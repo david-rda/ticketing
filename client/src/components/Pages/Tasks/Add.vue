@@ -100,7 +100,7 @@
             document.title = "თასქის დამატება";
             this.$store.commit("setToken");
             
-            const data = await axios.get("http://localhost/ticketing/server/public/api/priority/list", {
+            const data = await axios.get("http://172.16.30.19/ticketing/server/public/api/priority/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -108,7 +108,7 @@
 
             this.priority_list = data.data;
 
-            const users_list = await axios.get("http://localhost/ticketing/server/public/api/user/list", {
+            const users_list = await axios.get("http://172.16.30.19/ticketing/server/public/api/user/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -120,7 +120,7 @@
         methods : {
             async add_task() {
                 try {
-                    const create_task = await axios.post("http://localhost/ticketing/server/public/api/task/add", {
+                    const create_task = await axios.post("http://172.16.30.19/ticketing/server/public/api/task/add", {
                         title : this.title,
                         description : this.description,
                         priority : this.priority,
@@ -146,10 +146,6 @@
 
 <style scoped lang="scss">
     @import "../../../assets/css/variables.scss";
-
-    * {
-        font-family: "neue_regular" !important;
-    }
 
     label, button, input {
         font-size: 14px !important;

@@ -100,7 +100,7 @@
             document.title = "დავალების რედაქტირება";
             this.$store.commit("setToken");
             
-            const data = await axios.get("http://localhost/ticketing/server/public/api/priority/list", {
+            const data = await axios.get("http://172.16.30.19/ticketing/server/public/api/priority/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -108,7 +108,7 @@
 
             this.priority_list = data.data;
 
-            const users_list = await axios.get("http://localhost/ticketing/server/public/api/user/list", {
+            const users_list = await axios.get("http://172.16.30.19/ticketing/server/public/api/user/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -116,7 +116,7 @@
 
             this.users = users_list.data;
 
-            const loaded_task = await axios.get("http://localhost/ticketing/server/public/api/task/get/" + this.$route.params.id, {
+            const loaded_task = await axios.get("http://172.16.30.19/ticketing/server/public/api/task/get/" + this.$route.params.id, {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -134,7 +134,7 @@
         methods : {
             async edit_task() {
                 try {
-                    const create_task = await axios.put("http://localhost/ticketing/server/public/api/task/edit/" + this.$route.params.id, {
+                    const create_task = await axios.put("http://172.16.30.19/ticketing/server/public/api/task/edit/" + this.$route.params.id, {
                         title : this.title,
                         description : this.description,
                         priority : this.priority,
@@ -160,10 +160,6 @@
 
 <style scoped lang="scss">
     @import "../../../assets/css/variables.scss";
-
-    * {
-        font-family: "neue_regular" !important;
-    }
 
     label, button, input {
         font-size: 14px !important;

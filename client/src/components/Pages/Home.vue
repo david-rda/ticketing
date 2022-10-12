@@ -124,7 +124,7 @@
             document.title = "მთავარი";
             this.$store.commit("setToken");
 
-            const load_tasks = await axios.get("http://localhost/ticketing/server/public/api/task/list", {
+            const load_tasks = await axios.get("http://172.16.30.19/ticketing/server/public/api/task/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -138,13 +138,13 @@
             async markAs(e) {
                 let id = e.target.getAttribute("data-task-id");
 
-                await axios.put("http://localhost/ticketing/server/public/api/task/mark/" + id, {}, {
+                await axios.put("http://172.16.30.19/ticketing/server/public/api/task/mark/" + id, {}, {
                     headers : {
                         "Authorization" : `Bearer ${this.$store.state.token}`
                     }
                 });
 
-                const load_tasks = await axios.get("http://localhost/ticketing/server/public/api/task/list", {
+                const load_tasks = await axios.get("http://172.16.30.19/ticketing/server/public/api/task/list", {
                     headers : {
                         "Authorization" : `Bearer ${this.$store.state.token}`
                     }
@@ -156,13 +156,13 @@
             async deleteTask(e) {
                 let id = e.target.getAttribute("data-task-id");
 
-                await axios.delete("http://localhost/ticketing/server/public/api/task/delete/" + id, {
+                await axios.delete("http://172.16.30.19/ticketing/server/public/api/task/delete/" + id, {
                     headers : {
                         "Authorization" : `Bearer ${this.$store.state.token}`
                     }
                 });
 
-                const load_tasks = await axios.get("http://localhost/ticketing/server/public/api/task/list", {
+                const load_tasks = await axios.get("http://172.16.30.19/ticketing/server/public/api/task/list", {
                     headers : {
                         "Authorization" : `Bearer ${this.$store.state.token}`
                     }
@@ -180,36 +180,6 @@
         border-radius: 10px;
     }
 
-    .bg-info {
-        background-color: lighten(#0dcaf0, 35%) !important;
-        color: #0dcaf0 !important;
-        border: none;
-    }
-
-    .bg-warning {
-        background-color: lighten(#ffc107, 35%) !important;
-        color: #ffc107 !important;
-        border: none;
-    }
-
-    .bg-danger {
-        background-color: lighten(#dc3545, 35%) !important;
-        color: #dc3545 !important;
-        border: none;
-    }
-
-    .bg-success {
-        background-color: lighten(#198754, 35%) !important;
-        color: #198754 !important;
-        border: none;
-    }
-
-    .card-header {
-        border: none;
-        background-color: rgba(#fff, .0);
-        font-family: "neue_bold" !important;
-    }
-
     table {
         font-size: 14px;
 
@@ -217,7 +187,6 @@
             tr {
                 th {
                     border: none;
-                    font-family: "neue_bold" !important;
                 }
             }
         }
@@ -225,7 +194,14 @@
         tbody {
             tr {
                 td {
-                    font-family: "neue_regular" !important;
+                    font-family: "firago_regular" !important;
+
+                    &:nth-child(2) * {
+                        max-height: 80px !important;
+                        overflow: hidden !important;
+                        white-space: nowrap !important;
+                        text-overflow: ellipsis !important;
+                    }
                 }
             }
         }

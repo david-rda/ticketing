@@ -41,14 +41,14 @@
         },
 
         mounted() {
-            document.title = "პროფილის მართვა";
+            document.title = "პარამეტრები - პაროლის ცვლილება";
             this.$store.commit("setToken");
         },
 
         methods : {
             async change_password() {
                 try {
-                    await axios.put("http://localhost/ticketing/server/public/api/user/password/change", {
+                    await axios.put("http://172.16.30.19/ticketing/server/public/api/user/password/change", {
                         current_password : this.current_password,
                         new_password : this.new_password
                     }, {
@@ -73,10 +73,6 @@
     .container {
         border-radius: 6px;
         padding: 20px;
-    }
-
-    * {
-        font-family: "neue_regular" !important;
     }
 
     label, button, input {

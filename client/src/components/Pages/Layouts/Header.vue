@@ -9,7 +9,7 @@
                         <a href="#" class="dropdown-toggle" role="button" style="text-decoration: none !important" data-bs-toggle="dropdown">დავალებები</a>
 
                         <ul class="dropdown-menu">
-                            <li><router-link to="/task/list" class="dropdown-item">ყველა დავალება</router-link></li>
+                            <li><router-link to="/task/list" class="dropdown-item">ჩემი დავალება</router-link></li>
                             <li><router-link to="/task/add" class="dropdown-item">დავალების დამატება</router-link></li>
                         </ul>
                     </li>
@@ -21,12 +21,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <router-link class="nav-link" to="/profile/manage">
-                                    <span>პარამეტრები&nbsp;&nbsp;<BIconGear /></span>
+                                    <span>პარამეტრები</span>
                                 </router-link>
                             </li>
                             <li>
                                 <router-link class="nav-link" to="#" @click.prevent="logout()" title="სისტემიდან გასვლა">
-                                    <span>გასვლა&nbsp;&nbsp;<BIconBoxArrowRight /></span>
+                                    <span>გამოსვლა</span>
                                 </router-link>
                             </li>
                         </ul>
@@ -56,7 +56,7 @@
                 this.$router.push("/login");
             }
 
-            const user = await axios.get("http://localhost/ticketing/server/public/api/user/get/" + window.localStorage.getItem("uid"), {
+            const user = await axios.get("http://172.16.30.19/ticketing/server/public/api/user/get/" + window.localStorage.getItem("uid"), {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -68,7 +68,7 @@
         methods : {
             async logout() {
                 try {
-                    await axios.post("http://localhost/ticketing/server/public/api/logout");
+                    await axios.post("http://172.16.30.19/ticketing/server/public/api/logout");
 
                     window.localStorage.clear(); // სთორიჯის გასუფთავება
 
@@ -119,7 +119,7 @@
         }
     }
 
-    * {
-        font-family: "neue_bold" !important;
+    .navbar {
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     }
 </style>
