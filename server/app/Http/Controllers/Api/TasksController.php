@@ -283,9 +283,10 @@ class TasksController extends Controller implements ITasks
      */
     public function Mark_Task_As_Done(int $id) {
         try {
-            Task::whereId($id)->update([
-                "status_id" => 4
-            ]);
+
+            $task = Task::whereId($id)->first();
+            $task->status_id = ($task->status_id == 4) ? null : 4;
+            $task->save();
 
             return response()->json([
                 "message" => "მოინიშნა"
