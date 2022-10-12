@@ -63,6 +63,7 @@
                     window.localStorage.setItem("token", login.data.token);
                     window.localStorage.setItem("login", login.data.logged_in);
                     window.localStorage.setItem("role", login.data.user.role);
+                    window.localStorage.setItem("uid", login.data.user.id);
 
                     this.$store.commit("setRole");
                     this.$store.commit("setToken");

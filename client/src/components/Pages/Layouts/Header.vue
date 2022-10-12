@@ -7,19 +7,29 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a href="#" class="dropdown-toggle" role="button" style="text-decoration: none !important" data-bs-toggle="dropdown">დავალებები</a>
-                        <router-link class="link" to="/profile/manage">პროფილის მართვა</router-link>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul class="dropdown-menu">
                             <li><router-link to="/task/list" class="dropdown-item">ყველა დავალება</router-link></li>
                             <li><router-link to="/task/add" class="dropdown-item">დავალების დამატება</router-link></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <router-link class="nav-link" to="#" @click.prevent="logout()" title="სისტემიდან გასვლა">
-                            <img src="../../../assets/icons/logout.svg" class="icon-header">
-                        </router-link>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" style="text-decoration: none !important" data-bs-toggle="dropdown">{{ this.full_name }}</a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <router-link class="nav-link" to="/profile/manage">
+                                    <span>პარამეტრები&nbsp;&nbsp;<BIconGear /></span>
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link class="nav-link" to="#" @click.prevent="logout()" title="სისტემიდან გასვლა">
+                                    <span>გასვლა&nbsp;&nbsp;<BIconBoxArrowRight /></span>
+                                </router-link>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -33,10 +43,26 @@
     export default {
         name : "HeaderComponent",
 
-        mounted() {
+        data() {
+            return {
+                full_name : ""
+            }
+        },
+
+        async mounted() {
+            this.$store.commit("setToken");
+
             if(window.localStorage.getItem("login") == null) {
                 this.$router.push("/login");
             }
+
+            const user = await axios.get("http://localhost:8000/api/user/get/" + window.localStorage.getItem("uid"), {
+                headers : {
+                    "Authorization" : `Bearer ${this.$store.state.token}`
+                }
+            });
+
+            this.full_name = user.data.name;
         },
 
         methods : {
@@ -91,5 +117,9 @@
         &:hover {
             color: gray;
         }
+    }
+
+    * {
+        font-family: "neue_bold" !important;
     }
 </style>

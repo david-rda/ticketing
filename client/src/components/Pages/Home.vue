@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="container-fluid bg-white mt-5">
+        <div class="container-fluid mt-5 bg-white" style="width: 95% !important">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -91,9 +91,9 @@
                             </router-link>
                         </td>
                         <td>
-                            <router-link :to="'/task/delete/' + data.task_id" class="btn btn-danger" title="წაშლა">
+                            <button type="button" @click="deleteTask($event)" :data-task-id="data.task_id" class="btn btn-danger" title="წაშლა">
                                 <BIconTrash />
-                            </router-link>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -151,6 +151,24 @@
                 });
 
                 this.tasks = load_tasks.data;
+            },
+
+            async deleteTask(e) {
+                let id = e.target.getAttribute("data-task-id");
+
+                await axios.delete("http://localhost:8000/api/task/delete/" + id, {
+                    headers : {
+                        "Authorization" : `Bearer ${this.$store.state.token}`
+                    }
+                });
+
+                const load_tasks = await axios.get("http://localhost:8000/api/task/list", {
+                    headers : {
+                        "Authorization" : `Bearer ${this.$store.state.token}`
+                    }
+                });
+
+                this.tasks = load_tasks.data;
             }
         }
     }
@@ -189,6 +207,7 @@
     .card-header {
         border: none;
         background-color: rgba(#fff, .0);
+        font-family: "neue_bold" !important;
     }
 
     table {
@@ -197,7 +216,16 @@
         thead {
             tr {
                 th {
-                    border-bottom: 1px solid lightgray !important;
+                    border: none;
+                    font-family: "neue_bold" !important;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    font-family: "neue_regular" !important;
                 }
             }
         }
@@ -216,7 +244,8 @@
         }
     }
 
-    body {
-        margin: 10px;
+    .container-fluid {
+        border-radius: 4px;
+        padding: 0;
     }
 </style>
