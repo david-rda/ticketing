@@ -27,6 +27,9 @@
                     <editor :init="{resize: false}" v-model="description"></editor>
                 </div>
                 <div class="mb-3">
+                    <file-pond allow-multiple="true" server="http://localhost:8000/api/task/file/upload" />
+                </div>
+                <div class="mb-3">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"><BIconPlusCircleFill />&nbsp;პასუხისმგებელი</button>
                 </div>
                 <div class="mb-3 d-grid">
@@ -70,6 +73,12 @@
     import '@vuepic/vue-datepicker/dist/main.css';
     import Editor from "@tinymce/tinymce-vue";
     import axios, { AxiosError } from "axios";
+    
+    import vueFilePond from 'vue-filepond';
+
+    import 'filepond/dist/filepond.min.css';
+
+    const FilePond = vueFilePond();
 
     export default {
         name : "AddTask",
@@ -93,7 +102,8 @@
         components : {
             HeaderComponent,
             Datepicker,
-            Editor
+            Editor,
+            FilePond
         },
 
         async mounted() {

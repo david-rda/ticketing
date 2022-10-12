@@ -87,12 +87,12 @@
                         <td class="text-center"></td>
                         <td>
                             <router-link :to="'/task/edit/' + data.task_id" class="btn btn-primary" title="რედაქტირება">
-                                <BIconPencilSquare />
+                                <BIconPencilSquare class="pointer" />
                             </router-link>
                         </td>
                         <td>
                             <button type="button" @click="deleteTask($event)" :data-task-id="data.task_id" class="btn btn-danger" title="წაშლა">
-                                <BIconTrash />
+                                <BIconTrash class="pointer" />
                             </button>
                         </td>
                     </tr>
