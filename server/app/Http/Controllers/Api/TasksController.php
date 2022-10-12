@@ -16,24 +16,24 @@ use App\Models\TaskHasPerformer;
 class TasksController extends Controller implements ITasks
 {
     /**
-     * თასქის დამატების მეთოდი
+     * დავალების დამატების მეთოდი
      * @method POST
      * @param AddTaskRequest
      * @return json
      * 
      * @OA\Post(
      *     path="/api/task/add",
-     *     tags={"თასქების API"},
+     *     tags={"დავალებების API"},
      *     security={{"bearerAuth", {}}},
-     *     summary="თასქის დამატების მარსუტი",
+     *     summary="დავალების დამატების მარსუტი",
      * 
      *     @OA\Response(
-     *         description="თასქი დაემატა",
+     *         description="თქვენი დავალება წარმატებით გაიგზავნა",
      *         response=200
      *     ),
      * 
      *     @OA\Response(
-     *         description="თასქი ვერ დაემატა",
+     *         description="დავალება ვერ გაიგზავნა",
      *         response=422
      *     ),
      * 
@@ -63,7 +63,7 @@ class TasksController extends Controller implements ITasks
                         "end_date" => $validated["end_date"]
                     ]);
 
-                    $id = $create_task->id; // ახლად დამატებული თასქის აიდი
+                    $id = $create_task->id; // ახლად დამატებული დავალების აიდი
 
                     foreach($request->users as $users) {
                         TaskHasPerformer::insert([
@@ -76,18 +76,18 @@ class TasksController extends Controller implements ITasks
                 DB::commit();
 
                 return response()->json([
-                    "message" => "თასქი დაემატა"
+                    "message" => "თქვენი დავალება წარმატებით გაიგზავნა"
                 ], 200);
             }
         }catch(Exception $e) {
             return response()->json([
-                "message" => "თასქი ვერ დაემატა"
+                "message" => "დავალება ვერ გაიგზავნა"
             ], 422);
         }
     }
 
     /**
-     * თასქის წაშლის მეთოდი
+     * დავალების წაშლის მეთოდი
      * @param int<id>
      * @method DELETE
      * @return json
@@ -95,8 +95,8 @@ class TasksController extends Controller implements ITasks
      * @OA\Delete(
      *     path="/api/task/delete/{id}",
      *     security={{"bearerAuth":{}}},
-     *     tags={"თასქების API"},
-     *     summary="თასქის წაშლის მარშუტი",
+     *     tags={"დავალებების API"},
+     *     summary="დავალების წაშლის მარშუტი",
      * 
      *     @OA\Response(
      *         description="თასქი წაიშალა",
@@ -110,7 +110,7 @@ class TasksController extends Controller implements ITasks
      * 
      *     @OA\Parameter(
      *         name="id",
-     *         description="თასქის აიდი",
+     *         description="დავალების აიდი",
      *         required=true,
      *         in="path",
      *         
@@ -136,7 +136,7 @@ class TasksController extends Controller implements ITasks
     }
 
     /**
-     * თასქის რედაქტირების მეთოდი
+     * დავალების რედაქტირების მეთოდი
      * @param int<id>,EditTaskRequest $request
      * @method PUT
      * @return json
@@ -144,8 +144,8 @@ class TasksController extends Controller implements ITasks
      * @OA\Put(
      *     path="/api/task/edit/{id}",
      *     security={{"bearerAuth":{}}},
-     *     tags={"თასქების API"},
-     *     summary="თასქის რედაქტირების მარშუტი",
+     *     tags={"დავალებების API"},
+     *     summary="დავალების რედაქტირების მარშუტი",
      * 
      *     @OA\Response(
      *         description="თასქი დარედაქტირდა",
@@ -172,7 +172,7 @@ class TasksController extends Controller implements ITasks
      * 
      *     @OA\Parameter(
      *         name="id",
-     *         description="თასქის აიდი",
+     *         description="დავალების აიდი",
      *         required=true,
      *         in="path",
      *         
@@ -223,7 +223,7 @@ class TasksController extends Controller implements ITasks
      * @OA\Get(
      *     path="/api/task/list",
      *     security={{ "bearerAuth": {} }},
-     *     tags={"თასქების API"},
+     *     tags={"დავალებების API"},
      *     summary="დავალებების წამოღების მარშუტი",
      *     
      *     @OA\Response(
@@ -251,15 +251,15 @@ class TasksController extends Controller implements ITasks
     }
 
     /**
-     * თასქის შესრულებულად მონიშვნის მეთოდი
+     * დავალების შესრულებულად მონიშვნის მეთოდი
      * @param int $id
      * @return json
      * @method PUT
      * 
      * path="/api/task/mark/{id}",
      * security={{"bearerAuth":{}}},
-     * tags={"თასქების API"},
-     * summary="თასქის შესრულებულად მონიშვნის მარშუტი",
+     * tags={"დავალებების API"},
+     * summary="დავალების შესრულებულად მონიშვნის მარშუტი",
      * 
      * @OA\GPut
      *     @OA\Response(
@@ -274,7 +274,7 @@ class TasksController extends Controller implements ITasks
      * 
      *     @OA\Parameter(
      *         name="id",
-     *         description="თასქის აიდი",
+     *         description="დავალების აიდი",
      *         required=true,
      *         in="path",
      *         
@@ -302,14 +302,14 @@ class TasksController extends Controller implements ITasks
     }
 
     /**
-     * თასქის წამოღების მეთოდი აიდის მიხედვით
+     * დავალების წამოღების მეთოდი აიდის მიხედვით
      * @method GET,
      * @return json
      * 
      * @OA\Get(
      *     path="/api/task/get/{id}",
      *     security={{ "bearerAuth": {} }},
-     *     tags={"თასქების API"},
+     *     tags={"დავალებების API"},
      *     summary="დავალების წამოღების მარშუტი",
      *     
      *     @OA\Response(

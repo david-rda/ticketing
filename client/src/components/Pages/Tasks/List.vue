@@ -12,6 +12,10 @@
 
         components : {
             HeaderComponent
+        },
+
+        mounted() {
+            document.title = "ჩემი დავალებები"
         }
     }
 </script>
