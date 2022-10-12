@@ -86,7 +86,7 @@
                 msg : "",
                 users : [],
 
-                userids : []
+                userids : [],
             }
         },
 

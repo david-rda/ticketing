@@ -76,12 +76,12 @@ class TasksController extends Controller implements ITasks
                 DB::commit();
 
                 return response()->json([
-                    "message" => "თასქი დამეტა"
+                    "message" => "თასქი დაემატა"
                 ], 200);
             }
         }catch(Exception $e) {
             return response()->json([
-                "message" => "თასქი ვერ დამეტა"
+                "message" => "თასქი ვერ დაემატა"
             ], 422);
         }
     }

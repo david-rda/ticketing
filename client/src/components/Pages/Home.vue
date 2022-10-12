@@ -72,7 +72,7 @@
                 <tbody>
                     <tr v-for="data in tasks.tasks" :key="data.task_id">
                         <td>
-                            <button type="button" v-bind:class="data.status_id == 4 ? 'btn btn-success' : 'btn btn-secondary' " @click="markAs($event)" ref="mark" :data-task-id="data.task_id"><BIconCheck2 class="pointer" /></button>
+                            <button type="button" v-bind:class="data.status_id == 4 ? 'btn btn-success' : 'btn btn-outline-secondary' " @click="markAs($event)" ref="mark" :data-task-id="data.task_id"><BIconCheck2 class="pointer" /></button>
                             <span>&nbsp;&nbsp;&nbsp;{{ data.title }}</span>
                         </td>
                         <td>
@@ -184,14 +184,17 @@
         font-size: 14px;
     }
 
-    .pointer {
-        pointer-events: none;
-    }
-
     .btn {
         border-radius: 100%;
-        width: 50px;
-        height: 50px;
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        .pointer {
+            pointer-events: none;
+        }
     }
 
     body {
