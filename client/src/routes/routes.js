@@ -4,6 +4,7 @@ import HomeComponent from "../components/Pages/Home.vue";
 import AddTask from "../components/Pages/Tasks/Add.vue";
 import TaskList from "../components/Pages/Tasks/List.vue";
 import ManageProfile from "../components/Pages/Manage.vue";
+import EditTask from "../components/Pages/Tasks/Edit.vue";
 // === კომპონენტები ===
 
 /*========= მარშუტები ==========*/
@@ -27,6 +28,10 @@ const routes = [
     {
         path : "/profile/manage",
         component : ManageProfile
+    },
+    {
+        path : "/task/edit/:id",
+        component : EditTask
     }
 ];
 /*========= მარშუტები ==========*/

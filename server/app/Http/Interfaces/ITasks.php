@@ -15,5 +15,7 @@
         public function Task_List(); // დავალებების წამოღების მეთოდი
 
         public function Mark_Task_As_Done(int $id); //თასქის შესრულებულად მონიშვნის მეთოდი
+
+        public function Get_Task(int $id); // თასქის წამოღების მეთოდი
     }
 ?>

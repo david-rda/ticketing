@@ -31,10 +31,6 @@ class User extends Authenticatable
         "user_tasks"
     ];
 
-    public function user_tasks() {
-        return $this->hasMany(TaskHasPerformer::class, "performer_id", "id");
-    }
-
     public function getTaskAttribute() {
         return $this->user_tasks;
     }

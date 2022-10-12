@@ -81,8 +81,19 @@
                         <td>
                             {{ data.end_date }}
                         </td>
-                        <td>
+                        <td class="text-center">
                             {{ data.priority_id }}
+                        </td>
+                        <td class="text-center"></td>
+                        <td>
+                            <router-link :to="'/task/edit/' + data.task_id" class="btn btn-primary" title="რედაქტირება">
+                                <BIconPencilSquare />
+                            </router-link>
+                        </td>
+                        <td>
+                            <router-link :to="'/task/delete/' + data.task_id" class="btn btn-danger" title="წაშლა">
+                                <BIconTrash />
+                            </router-link>
                         </td>
                     </tr>
                 </tbody>
@@ -182,6 +193,14 @@
 
     table {
         font-size: 14px;
+
+        thead {
+            tr {
+                th {
+                    border-bottom: 1px solid lightgray !important;
+                }
+            }
+        }
     }
 
     .btn {

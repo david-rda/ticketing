@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\User;
+use App\Models\Task;
 
 class TaskHasPerformer extends Model
 {
@@ -19,24 +20,10 @@ class TaskHasPerformer extends Model
         "task_id", "performer_id"
     ];
 
-    protected $appends = [
-        "tasks"
-    ];
+    public $timestamps = false;
 
-    protected $hidden = [
-        "task"
-    ];
-
-    public $timestamps = true;
-
-    public function task() {
-        return $this->hasMany(Task::class, "id", "task_id");
-    }
-
-    public function tasks() : Attribute {
-        return Attribute::make(
-            get : fn() => $this->task
-        );
+    public function getPerformerIdAttribute($value) {
+        return (int)$value;
     }
 }
 ?>

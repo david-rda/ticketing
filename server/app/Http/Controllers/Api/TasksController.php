@@ -186,12 +186,22 @@ class TasksController extends Controller implements ITasks
 
         if($validated) {
             try {
-                Task::whereId($id)->update([
-                    "title" => $validated["title"],
-                    "description" => $validated["description"],
-                    "priority" => $validated["priority"],
-                    "end_date" => $validated["end_date"]
-                ]);
+
+                DB::transaction(function() use($validated, $request, $id) {
+                    Task::whereId($id)->update([
+                        "title" => $validated["title"],
+                        "description" => $validated["description"],
+                        "priority_id" => $validated["priority"],
+                        "end_date" => $validated["end_date"]
+                    ]);
+
+                    foreach($request->users as $users) {
+                        TaskHasPerformer::updateOrCreate([
+                            "performer_id" => $users,
+                            "task_id" => $id
+                        ]);
+                    }
+                });
 
                 return response()->json([
                     "message" => "თასქი დარედაქტირდა"
@@ -285,5 +295,31 @@ class TasksController extends Controller implements ITasks
                 "message" => "ვერ მოინიშნა"
             ], 422);
         }
+    }
+
+    /**
+     * თასქის წამოღების მეთოდი აიდის მიხედვით
+     * @method GET,
+     * @return json
+     * 
+     * @OA\Get(
+     *     path="/api/task/get/{id}",
+     *     security={{ "bearerAuth": {} }},
+     *     tags={"თასქების API"},
+     *     summary="დავალების წამოღების მარშუტი",
+     *     
+     *     @OA\Response(
+     *         description="დავალება ჩაიტვირთა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="დავალება ვერ ჩაიტვირთა",
+     *         response=422
+     *     )
+     * )
+     */
+    public function Get_Task(int $id) {
+        return Task::whereId($id)->first();
     }
 }
