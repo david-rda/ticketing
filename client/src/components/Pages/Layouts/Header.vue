@@ -56,7 +56,7 @@
                 this.$router.push("/login");
             }
 
-            const user = await axios.get("http://localhost:8000/api/user/get/" + window.localStorage.getItem("uid"), {
+            const user = await axios.get("http://localhost/ticketing/server/public/api/user/get/" + window.localStorage.getItem("uid"), {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -68,7 +68,7 @@
         methods : {
             async logout() {
                 try {
-                    await axios.post("http://localhost:8000/api/logout");
+                    await axios.post("http://localhost/ticketing/server/public/api/logout");
 
                     window.localStorage.clear(); // სთორიჯის გასუფთავება
 

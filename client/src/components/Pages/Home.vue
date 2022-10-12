@@ -124,7 +124,7 @@
             document.title = "მთავარი";
             this.$store.commit("setToken");
 
-            const load_tasks = await axios.get("http://localhost:8000/api/task/list", {
+            const load_tasks = await axios.get("http://localhost/ticketing/server/public/api/task/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -138,13 +138,13 @@
             async markAs(e) {
                 let id = e.target.getAttribute("data-task-id");
 
-                await axios.put("http://localhost:8000/api/task/mark/" + id, {}, {
+                await axios.put("http://localhost/ticketing/server/public/api/task/mark/" + id, {}, {
                     headers : {
                         "Authorization" : `Bearer ${this.$store.state.token}`
                     }
                 });
 
-                const load_tasks = await axios.get("http://localhost:8000/api/task/list", {
+                const load_tasks = await axios.get("http://localhost/ticketing/server/public/api/task/list", {
                     headers : {
                         "Authorization" : `Bearer ${this.$store.state.token}`
                     }
@@ -156,13 +156,13 @@
             async deleteTask(e) {
                 let id = e.target.getAttribute("data-task-id");
 
-                await axios.delete("http://localhost:8000/api/task/delete/" + id, {
+                await axios.delete("http://localhost/ticketing/server/public/api/task/delete/" + id, {
                     headers : {
                         "Authorization" : `Bearer ${this.$store.state.token}`
                     }
                 });
 
-                const load_tasks = await axios.get("http://localhost:8000/api/task/list", {
+                const load_tasks = await axios.get("http://localhost/ticketing/server/public/api/task/list", {
                     headers : {
                         "Authorization" : `Bearer ${this.$store.state.token}`
                     }

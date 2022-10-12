@@ -48,7 +48,7 @@
         methods : {
             async change_password() {
                 try {
-                    await axios.put("http://localhost:8000/api/user/password/change", {
+                    await axios.put("http://localhost/ticketing/server/public/api/user/password/change", {
                         current_password : this.current_password,
                         new_password : this.new_password
                     }, {

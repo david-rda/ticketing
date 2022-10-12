@@ -27,9 +27,6 @@
                     <editor :init="{resize: false}" v-model="description"></editor>
                 </div>
                 <div class="mb-3">
-                    <file-pond allow-multiple="true" server="http://localhost:8000/api/task/file/upload" />
-                </div>
-                <div class="mb-3">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"><BIconPlusCircleFill />&nbsp;პასუხისმგებელი</button>
                 </div>
                 <div class="mb-3 d-grid">
@@ -73,12 +70,6 @@
     import '@vuepic/vue-datepicker/dist/main.css';
     import Editor from "@tinymce/tinymce-vue";
     import axios, { AxiosError } from "axios";
-    
-    import vueFilePond from 'vue-filepond';
-
-    import 'filepond/dist/filepond.min.css';
-
-    const FilePond = vueFilePond();
 
     export default {
         name : "AddTask",
@@ -102,15 +93,14 @@
         components : {
             HeaderComponent,
             Datepicker,
-            Editor,
-            FilePond
+            Editor
         },
 
         async mounted() {
             document.title = "თასქის დამატება";
             this.$store.commit("setToken");
             
-            const data = await axios.get("http://localhost:8000/api/priority/list", {
+            const data = await axios.get("http://localhost/ticketing/server/public/api/priority/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -118,7 +108,7 @@
 
             this.priority_list = data.data;
 
-            const users_list = await axios.get("http://localhost:8000/api/user/list", {
+            const users_list = await axios.get("http://localhost/ticketing/server/public/api/user/list", {
                 headers : {
                     "Authorization" : `Bearer ${this.$store.state.token}`
                 }
@@ -130,7 +120,7 @@
         methods : {
             async add_task() {
                 try {
-                    const create_task = await axios.post("http://localhost:8000/api/task/add", {
+                    const create_task = await axios.post("http://localhost/ticketing/server/public/api/task/add", {
                         title : this.title,
                         description : this.description,
                         priority : this.priority,

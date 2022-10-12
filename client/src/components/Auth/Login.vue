@@ -55,7 +55,7 @@
         methods : {
             async login() {
                 try {
-                    const login = await axios.post("http://localhost:8000/api/login", {
+                    const login = await axios.post("http://localhost/ticketing/server/public/api/login", {
                         email : this.email,
                         password : this.password
                     });
