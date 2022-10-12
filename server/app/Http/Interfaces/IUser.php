@@ -11,5 +11,7 @@
         public function User_List(); // მომხმარებელთა სიის გამოტანის მეტოდი
 
         public function Change_Password(PasswordChangeRequest $request); // პაროლის ცვლილების მეთოდი
+
+        public function User_Get(int $id); // მომხმარებლის ინფოს წამოღების მეთოდი
     }
 ?>

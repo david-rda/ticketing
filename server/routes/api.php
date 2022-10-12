@@ -17,6 +17,8 @@ Route::group(["prefix" => "user", "middleware" => "auth:api"], function() {
 
     Route::get("/list", [UserController::class, "User_List"]); // მომხმარებლის სიის წამოღების მარშუტი
 
+    Route::get("/get/{id}", [UserController::class, "User_Get"]); // მომხმარებლის ინფოს გამოტანის მარშუტი
+
     Route::put("/password/change", [UserController::class, "Change_Password"]); // პაროლის ცვლილების მარშუტი
 });
 

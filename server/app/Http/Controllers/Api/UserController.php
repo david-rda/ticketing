@@ -81,7 +81,7 @@ class UserController extends Controller implements IUser
     }
 
     /** 
-     * მომხმარებელთა სიის გამოტანის მეტოდი
+     * მომხმარებელთა სიის გამოტანის მეთოდი
      * @method GET
      * @return json
      * 
@@ -159,5 +159,31 @@ class UserController extends Controller implements IUser
                 ], 422);
             }
         }
+    }
+
+    /** 
+     * მომხმარებლის ინფოს წამოღების მეთოდი
+     * @method GET
+     * @return json
+     * 
+     * @OA\Post(
+     *     path="/api/user/get/{id}",
+     *     tags={"მომხმარებლების API"},
+     *     security={{"bearerAuth", {}}},
+     *     summary="მომხმარებლის ინფოს გამოტანის მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="მომხმარებელი ჩაიტვირთა",
+     *         response=200
+     *     ),
+     *     
+     *     @OA\Response(
+     *         description="მომხმარებელი ვერ ჩაიტვირთა",
+     *         response=422
+     *     )
+     * )
+    */
+    public function User_Get(int $id) {
+        return User::whereId($id)->first();
     }
 }
