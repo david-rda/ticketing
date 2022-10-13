@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-3">
                     <div class="mb-3">
-                        <h5>Not started</h5>
+                        <h5 style="font-size: 17px">Not started</h5>
                     </div>
-                    <hr>
+                    <hr style="color: rgb(173 173 173)">
                     <!-- START შემოსული დავალებების სია -->
                     <div class="card mb-3" v-for="data in notStarted" :key="data.task_id">
                         <div class="card-header d-inline-flex">
@@ -37,9 +37,9 @@
                 </div>
                 <div class="col-3">
                     <div class="mb-3">
-                        <h5>In progress</h5>
+                        <h5 style="font-size: 17px">In progress</h5>
                     </div>
-                    <hr>
+                    <hr style="color: rgb(173 173 173)">
                     <!-- START შემოსული დავალებების სია -->
                     <div class="card mb-3" v-for="data in inProgress" :key="data.task_id">
                         <div class="card-header d-inline-flex">
@@ -68,9 +68,9 @@
                 </div>
                 <div class="col-3">
                     <div class="mb-3">
-                        <h5>Waiting</h5>
+                        <h5 style="font-size: 17px">Waiting</h5>
                     </div>
-                    <hr>
+                    <hr style="color: rgb(173 173 173)">
                     <!-- START შემოსული დავალებების სია -->
                     <div class="card mb-3" v-for="data in waiting" :key="data.task_id">
                         <div class="card-header d-inline-flex">
@@ -99,9 +99,9 @@
                 </div>
                 <div class="col-3">
                     <div class="mb-3">
-                        <h5>Done</h5>
+                        <h5 style="font-size: 17px">Done</h5>
                     </div>
-                    <hr>
+                    <hr style="color: rgb(173 173 173)">
                     <!-- START შემოსული დავალებების სია -->
                     <div class="card mb-3" v-for="data in done" :key="data.task_id">
                         <div class="card-header d-inline-flex">
@@ -165,7 +165,7 @@
                         }
                     });
 
-                    window.location.reload()
+                    e.target.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = "none";
                 }catch(err) {
                     console.log(err);
                 }
@@ -180,7 +180,7 @@
             const waiting = await tasks_by_status(this.$store.state.token, 3); // განხილვის რეჟიმში მყოფი დავალებები
             const done = await tasks_by_status(this.$store.state.token, 4); // შესრულებული დავალებები
 
-            this.notStarted = not_started.data; // ახლად შემოსული დავალებები
+            this.notStarted = not_started.data; 
             this.inProgress = in_progress.data; // მიმდინარე დავალებები
             this.waiting = waiting.data; // განხილვის რეჟიმში მყოფი დავალებები
             this.done = done.data; // შესრულებული დავალებ

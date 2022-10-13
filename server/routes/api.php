@@ -15,7 +15,7 @@ Route::post("/logout", [LogoutController::class, "Logout"]);
 Route::group(["prefix" => "user", "middleware" => "auth:api"], function() {
     Route::post("/insert", [UserController::class, "Insert_Users"]); // მომხმარებლების ატვირთვის მარშუტი
 
-    Route::get("/list", [UserController::class, "User_List"]); // მომხმარებლის სიის წამოღების მარშუტი
+    Route::post("/search", [UserController::class, "User_Search"]); // მომხმარებლის სიის წამოღების მარშუტი
 
     Route::get("/get/{id}", [UserController::class, "User_Get"]); // მომხმარებლის ინფოს გამოტანის მარშუტი
 

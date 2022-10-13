@@ -81,12 +81,13 @@ class UserController extends Controller implements IUser
     }
 
     /** 
-     * მომხმარებელთა სიის გამოტანის მეთოდი
+     * // მომხმარებელთა ძებნის მეთოდი
      * @method GET
+     * @param Request fullname
      * @return json
      * 
      * @OA\Post(
-     *     path="/api/user/list",
+     *     path="/api/user/search",
      *     tags={"მომხმარებლების API"},
      *     security={{"bearerAuth", {}}},
      *     summary="მომხმარებელთა სიის გამოტანის მარშუტი",
@@ -102,8 +103,8 @@ class UserController extends Controller implements IUser
      *     )
      * )
     */
-    public function User_List() {
-        return User::where("role", 2)->get();
+    public function User_Search(Request $request) {
+        return User::where("name", "like", "%" . $request->fullname . "%")->get();
     }
 
     /**

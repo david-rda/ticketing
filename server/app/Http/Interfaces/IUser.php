@@ -8,7 +8,7 @@
     interface IUser {
         public function Insert_Users(Request $request); // მომხმარებლების ატვირთვის მეთოდი
 
-        public function User_List(); // მომხმარებელთა სიის გამოტანის მეტოდი
+        public function User_Search(Request $request); // მომხმარებელთა ძებნის მეტოდი
 
         public function Change_Password(PasswordChangeRequest $request); // პაროლის ცვლილების მეთოდი
 

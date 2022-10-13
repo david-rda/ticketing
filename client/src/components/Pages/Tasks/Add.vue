@@ -49,6 +49,12 @@
                         <h6 class="modal-title">პასუხისმგებელ პირზე მიმაგრება</h6>
                     </div>
                     <div class="modal-body">
+                        <form method="POST" class="mb-3">
+                            <input type="text" placeholder="სახელი, გვარი" class="form-control" v-model="fullname" @keyup="user_search()">
+                        </form>
+                        <div class="text-center mb-3">
+                            <span class="text-center">{{ notfound }}</span>
+                        </div>
                         <div class="list-unstyled" v-for="(user, index) in users" :key="index">
                             <li>
                                 <label><input type="checkbox" v-model="userids" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
@@ -84,6 +90,7 @@
                 priority_list : [],
                 created : "",
                 msg : "",
+                fullname : "",
                 users : [],
 
                 userids : [],
@@ -107,14 +114,6 @@
             });
 
             this.priority_list = data.data;
-
-            const users_list = await axios.get("http://172.16.30.19/ticketing/server/public/api/user/list", {
-                headers : {
-                    "Authorization" : `Bearer ${this.$store.state.token}`
-                }
-            });
-
-            this.users = users_list.data;
         },
 
         methods : {
@@ -140,6 +139,25 @@
                     }
                 }
             },
+
+            async user_search() {
+                try {
+                    if(this.fullname.trim() == "" || this.fullname.trim() == null || this.fullname.length === 0) {
+                        return false;
+                    }else {
+                        const users = await axios.post("http://172.16.30.19/ticketing/server/public/api/user/search", {
+                            fullname : this.fullname
+                        }, {
+                            headers : {
+                                "Authorization" : `Bearer ${this.$store.state.token}`
+                            }
+                        });
+                        this.users = users.data;
+                    }
+                }catch(Err) {
+                    console.log(Err);
+                }
+            }
         }
     }
 </script>
