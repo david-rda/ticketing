@@ -1,9 +1,9 @@
 <?php
     namespace App\Helpers;
-    
+
     class CharTranslator {
-        private $english;
-        private $georgian;
+        private array $english;
+        private array $georgian;
 
         public function __construct() {
             $this->english = [

@@ -105,8 +105,8 @@ class UserController extends Controller implements IUser
      * )
     */
     public function User_Search(Request $request) {
-        $translator = new CharTranslator();
-        $fullname = $translator->english_to_georgian($request->fullname);
+        @$translator = new CharTranslator();
+        @$fullname = @$translator->english_to_georgian($request->fullname);
 
         return User::where("name", "like", "%" . $fullname . "%")->get();
     }
