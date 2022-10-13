@@ -42,22 +42,6 @@
             </div>
         </div>
 
-        <div class="modal fade" role="modal" id="addTaskModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">თასქის დამატება</h5>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="container-fluid mt-5 bg-white" style="width: 95% !important">
             <table class="table table-hover">
                 <thead>
@@ -105,6 +89,7 @@
 <script>
     import HeaderComponent from "./Layouts/Header.vue";
     import axios from "axios";
+    import { load_tasks } from "../../helpers/helper";
 
     export default {
         name : "HomeComponent",
@@ -124,14 +109,10 @@
             document.title = "მთავარი";
             this.$store.commit("setToken");
 
-            const load_tasks = await axios.get("http://172.16.30.19/ticketing/server/public/api/task/list", {
-                headers : {
-                    "Authorization" : `Bearer ${this.$store.state.token}`
-                }
-            });
+            const tasks = await load_tasks(this.$store.state.token); // კონკრეტული იუზერის დავალების ჩატვირთვის ფუნქცია
 
-            this.tasks = load_tasks.data;
-            this.new_tasks_count = load_tasks.data.count;
+            this.tasks = tasks.data;
+            this.new_tasks_count = tasks.data.count;
         },
 
         methods : {
@@ -144,13 +125,9 @@
                     }
                 });
 
-                const load_tasks = await axios.get("http://172.16.30.19/ticketing/server/public/api/task/list", {
-                    headers : {
-                        "Authorization" : `Bearer ${this.$store.state.token}`
-                    }
-                });
+                const tasks = await load_tasks(this.$store.state.token); // კონკრეტული იუზერის დავალების ჩატვირთვის ფუნქცია
 
-                this.tasks = load_tasks.data;
+                this.tasks = tasks.data;
             },
 
             async deleteTask(e) {
@@ -162,13 +139,9 @@
                     }
                 });
 
-                const load_tasks = await axios.get("http://172.16.30.19/ticketing/server/public/api/task/list", {
-                    headers : {
-                        "Authorization" : `Bearer ${this.$store.state.token}`
-                    }
-                });
+                const tasks = await load_tasks(this.$store.state.token); // კონკრეტული იუზერის დავალების ჩატვირთვის ფუნქცია
 
-                this.tasks = load_tasks.data;
+                this.tasks = tasks.data;
             }
         }
     }
@@ -177,7 +150,6 @@
 <style lang="scss" scoped>
     .card {
         margin-left: 50px !important;
-        border-radius: 10px;
     }
 
     table {

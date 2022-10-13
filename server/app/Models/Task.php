@@ -63,7 +63,7 @@ class Task extends Model
         $ids = array();
 
         foreach($this->performer as $performers) {
-            array_push($ids, $performers->performer_id);
+            array_push($ids, $performers);
         }
 
         return $ids;

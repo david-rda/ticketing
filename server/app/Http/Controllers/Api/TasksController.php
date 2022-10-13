@@ -304,6 +304,7 @@ class TasksController extends Controller implements ITasks
     /**
      * დავალების წამოღების მეთოდი აიდის მიხედვით
      * @method GET,
+     * @param int $id თასქის აიდი
      * @return json
      * 
      * @OA\Get(
@@ -325,5 +326,37 @@ class TasksController extends Controller implements ITasks
      */
     public function Get_Task(int $id) {
         return Task::whereId($id)->first();
+    }
+
+    /**
+     * დავალებების წამოღება სტატუსის მიხედვით
+     * @method GET
+     * @param int status_id
+     * @return json
+     * 
+     * @OA\Get(
+     *     path="/api/task/by/status/{status_id}",
+     *     security={{ "bearerAuth": {} }},
+     *     tags={"დავალებების API"},
+     *     summary="დავალების სტატუსის მიხედვით წამოღების მარშუტი",
+     *     
+     *     @OA\Response(
+     *         description="დავალება ჩაიტვირთა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="დავალება ვერ ჩაიტვირთა",
+     *         response=422
+     *     )
+     * )
+     */
+    public function Task_By_Status(int $status_id) {
+        return Task::join("task_has_performers", "tasks.id", "=", "task_has_performers.task_id")
+                    ->join("users", "users.id", "=", "task_has_performers.performer_id")
+                    ->where("task_has_performers.performer_id", Auth::id())
+                    ->where("tasks.status_id", $status_id)
+                    ->orderBy("created_at", "DESC")
+                    ->get(); 
     }
 }

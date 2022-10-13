@@ -9,7 +9,7 @@
                         <a href="#" class="dropdown-toggle" role="button" style="text-decoration: none !important" data-bs-toggle="dropdown">დავალებები</a>
 
                         <ul class="dropdown-menu">
-                            <li><router-link to="/task/list" class="dropdown-item">ჩემი დავალება</router-link></li>
+                            <li><router-link to="/task/list" class="dropdown-item">ჩემი დავალებები</router-link></li>
                             <li><router-link to="/task/add" class="dropdown-item">დავალების დამატება</router-link></li>
                         </ul>
                     </li>
@@ -121,5 +121,6 @@
 
     .navbar {
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        height: 70px !important;
     }
 </style>
