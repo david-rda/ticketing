@@ -165,7 +165,7 @@
                         }
                     });
 
-                    e.target.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = "none";
+                    //e.target.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = "none";
                 }catch(err) {
                     console.log(err);
                 }

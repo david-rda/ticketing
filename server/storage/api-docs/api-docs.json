@@ -300,10 +300,10 @@
         "/api/task/add": {
             "post": {
                 "tags": [
-                    "თასქების API"
+                    "დავალებების API"
                 ],
-                "summary": "თასქის დამატების მარსუტი",
-                "description": "თასქის დამატების მეთოდი",
+                "summary": "დავალების დამატების მარსუტი",
+                "description": "დავალების დამატების მეთოდი",
                 "operationId": "acffc0c73df6121a2a9d7e63b6a784fe",
                 "requestBody": {
                     "required": true,
@@ -335,10 +335,10 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "თასქი დაემატა"
+                        "description": "თქვენი დავალება წარმატებით გაიგზავნა"
                     },
                     "422": {
-                        "description": "თასქი ვერ დაემატა"
+                        "description": "დავალება ვერ გაიგზავნა"
                     }
                 },
                 "security": [
@@ -352,16 +352,16 @@
         "/api/task/delete/{id}": {
             "delete": {
                 "tags": [
-                    "თასქების API"
+                    "დავალებების API"
                 ],
-                "summary": "თასქის წაშლის მარშუტი",
-                "description": "თასქის წაშლის მეთოდი",
+                "summary": "დავალების წაშლის მარშუტი",
+                "description": "დავალების წაშლის მეთოდი",
                 "operationId": "f6f182d3dc181762cc091fd9262c717c",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "თასქის აიდი",
+                        "description": "დავალების აიდი",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -386,16 +386,16 @@
         "/api/task/edit/{id}": {
             "put": {
                 "tags": [
-                    "თასქების API"
+                    "დავალებების API"
                 ],
-                "summary": "თასქის რედაქტირების მარშუტი",
-                "description": "თასქის რედაქტირების მეთოდი",
+                "summary": "დავალების რედაქტირების მარშუტი",
+                "description": "დავალების რედაქტირების მეთოდი",
                 "operationId": "0bc84a2a1270d79b550e8d7ec54a7e2e",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "თასქის აიდი",
+                        "description": "დავალების აიდი",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -454,7 +454,7 @@
         "/api/task/list": {
             "get": {
                 "tags": [
-                    "თასქების API"
+                    "დავალებების API"
                 ],
                 "summary": "დავალებების წამოღების მარშუტი",
                 "description": "დავალებების წამოღების მეთოდი",
@@ -477,11 +477,34 @@
         "/api/task/get/{id}": {
             "get": {
                 "tags": [
-                    "თასქების API"
+                    "დავალებების API"
                 ],
                 "summary": "დავალების წამოღების მარშუტი",
-                "description": "თასქის წამოღების მეთოდი აიდის მიხედვით",
+                "description": "დავალების წამოღების მეთოდი აიდის მიხედვით",
                 "operationId": "fc90bf118396c4328d7352543bacba6f",
+                "responses": {
+                    "200": {
+                        "description": "დავალება ჩაიტვირთა"
+                    },
+                    "422": {
+                        "description": "დავალება ვერ ჩაიტვირთა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/task/by/status/{status_id}": {
+            "get": {
+                "tags": [
+                    "დავალებების API"
+                ],
+                "summary": "დავალების სტატუსის მიხედვით წამოღების მარშუტი",
+                "description": "დავალებების წამოღება სტატუსის მიხედვით",
+                "operationId": "5c580b7d3daa5abe1aefd0a0cfb781c4",
                 "responses": {
                     "200": {
                         "description": "დავალება ჩაიტვირთა"
@@ -563,14 +586,33 @@
                 ]
             }
         },
-        "/api/user/list": {
+        "/api/user/search": {
             "post": {
                 "tags": [
                     "მომხმარებლების API"
                 ],
                 "summary": "მომხმარებელთა სიის გამოტანის მარშუტი",
-                "description": "მომხმარებელთა სიის გამოტანის მეთოდი",
-                "operationId": "b4c3d12a340f78efce99e41ded753d12",
+                "description": "// მომხმარებელთა ძებნის მეთოდი",
+                "operationId": "0ee6792ab9521d1408d646851bf2ad44",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullname"
+                                ],
+                                "properties": {
+                                    "fullname": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "john doe"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "სია ჩაიტვირთა"
@@ -743,7 +785,7 @@
             "id": {
                 "name": "id",
                 "in": "path",
-                "description": "თასქის აიდი",
+                "description": "დავალების აიდი",
                 "required": true,
                 "schema": {
                     "type": "integer"

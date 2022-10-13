@@ -101,6 +101,15 @@ class UserController extends Controller implements IUser
      *     @OA\Response(
      *         description="სია ვერ ჩაიტვირთა",
      *         response=422
+     *     ),
+     * 
+     *     @OA\RequestBody(
+     * 
+     *         @OA\JsonContent (
+     *             required = {"fullname"},
+     * 
+     *             @OA\Property(property="fullname", type="string", format="string", example="john doe"),
+     *         )
      *     )
      * )
     */
