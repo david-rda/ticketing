@@ -598,9 +598,6 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "fullname"
-                                ],
                                 "properties": {
                                     "fullname": {
                                         "type": "string",

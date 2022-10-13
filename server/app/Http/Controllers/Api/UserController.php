@@ -106,8 +106,6 @@ class UserController extends Controller implements IUser
      *     @OA\RequestBody(
      * 
      *         @OA\JsonContent (
-     *             required = {"fullname"},
-     * 
      *             @OA\Property(property="fullname", type="string", format="string", example="john doe"),
      *         )
      *     )
