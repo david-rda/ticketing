@@ -152,6 +152,7 @@
                                 "Authorization" : `Bearer ${this.$store.state.token}`
                             }
                         });
+                        
                         this.users = users.data;
                     }
                 }catch(Err) {

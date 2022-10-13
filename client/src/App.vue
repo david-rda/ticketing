@@ -33,5 +33,6 @@
     * {
         box-sizing: border-box !important;
         font-family: "firago_regular" !important;
+        font-weight: 600 !important;
     }
 </style>

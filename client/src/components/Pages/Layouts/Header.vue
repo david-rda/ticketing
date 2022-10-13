@@ -20,12 +20,12 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <router-link class="nav-link" to="/profile/manage">
+                                <router-link class="dropdown-item" to="/profile/manage">
                                     <span>პარამეტრები</span>
                                 </router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="#" @click.prevent="logout()" title="სისტემიდან გასვლა">
+                                <router-link class="dropdown-item" to="#" @click.prevent="logout()" title="სისტემიდან გასვლა">
                                     <span>გამოსვლა</span>
                                 </router-link>
                             </li>

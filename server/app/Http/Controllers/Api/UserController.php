@@ -11,6 +11,7 @@ use Hash;
 use DB;
 use Auth;
 use App\Models\User;
+use App\Helpers\CharTranslator;
 
 class UserController extends Controller implements IUser
 {
@@ -104,7 +105,10 @@ class UserController extends Controller implements IUser
      * )
     */
     public function User_Search(Request $request) {
-        return User::where("name", "like", "%" . $request->fullname . "%")->get();
+        $translator = new CharTranslator();
+        $fullname = $translator->english_to_georgian($request->fullname);
+
+        return User::where("name", "like", "%" . $fullname . "%")->get();
     }
 
     /**
