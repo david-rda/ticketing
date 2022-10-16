@@ -134,13 +134,15 @@ class TasksController extends Controller implements ITasks
      * )
      */
     public function Delete_Task_File(int $id) {
-        $delete_file = TaskFile::whereId($id)->delete();
+        try {
+            $filename = TaskFile::whereId($id)->first()->filename; // ბაზიდან წამოღებული ფაილის სახელი
+            $delete_file = TaskFile::whereId($id)->delete(); // ბაზიდან ფაილის ამოშლა
+            unlink(public_path("documents/") . $filename); // ფიზიკურად ფაილის წაშლა ფოლდერიდან
 
-        if($delete_file) {
             return response()->json([
                 "message" => "ფაილი წაიშალა"
             ], 200);
-        }else {
+        }catch(Exception $e) {
             return response()->json([
                 "message" => "ფაილი ვერ წაიშალა"
             ], 422);
