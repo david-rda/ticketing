@@ -19,5 +19,7 @@
         public function Get_Task(int $id); // დავალების წამოღების მეთოდი
 
         public function Task_By_Status(int $status_id); // თასქის წამოღების მეთოდი სტატუსის მიხედვით
+
+        public function Delete_Task_File(int $id); // თასქზე მიმაგრებული ფაილის წაშლის მეთოდი
     }
 ?>
