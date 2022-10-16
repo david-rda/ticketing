@@ -10,6 +10,7 @@ use App\Http\Requests\AddTaskRequest;
 use App\Http\Requests\EditTaskRequest;
 use DB;
 use Auth;
+use Str;
 use App\Models\Task;
 use App\Models\TaskHasPerformer;
 
@@ -65,6 +66,17 @@ class TasksController extends Controller implements ITasks
 
                     $id = $create_task->id; // ახლად დამატებული დავალების აიდი
 
+                    foreach($request->file("files") as $files) {
+                        $filename = Str::random(4) . "_" . $files->getClientOriginalName();
+
+                        $files->move(public_path("documents"), $filename);
+
+                        TaskFile::insert([
+                            "filename" => $filename,
+                            "task_id" => $id
+                        ]);
+                    }
+
                     foreach($request->users as $users) {
                         TaskHasPerformer::insert([
                             "performer_id" => $users,
@@ -81,7 +93,7 @@ class TasksController extends Controller implements ITasks
             }
         }catch(Exception $e) {
             return response()->json([
-                "message" => "დავალება ვერ გაიგზავნა"
+                "message" => "თქვენი დავალება ვერ გაიგზავნა"
             ], 422);
         }
     }

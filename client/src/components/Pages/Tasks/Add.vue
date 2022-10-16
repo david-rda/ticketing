@@ -27,6 +27,9 @@
                     <editor :init="{resize: false}" v-model="description"></editor>
                 </div>
                 <div class="mb-3">
+                    <input type="file" class="form-control" multiple @change="handleFiles($event)">
+                </div>
+                <div class="mb-3">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"><BIconPlusCircleFill />&nbsp;პასუხისმგებელი</button>
                 </div>
                 <div class="mb-3 d-grid">
@@ -94,6 +97,8 @@
                 users : [],
 
                 userids : [],
+
+                files : []
             }
         },
 
@@ -117,17 +122,30 @@
         },
 
         methods : {
+            handleFiles(e) {
+                for(let i = 0; i < e.target.files.length; i++) {
+                    this.files.push(e.target.files[i]);
+                }
+            },
+
             async add_task() {
+                var formData = new FormData();
+
+                for(let i = 0; i < this.files.length; i++) {
+                    formData.append("files[]", this.files[i]);
+                }
+
+                formData.append("title", this.title);
+                formData.append("description", this.description);
+                formData.append("priority", this.priority);
+                formData.append("end_date", this.end_date);
+                formData.append("users", this.userids);
+
                 try {
-                    const create_task = await axios.post("http://172.16.30.19/ticketing/server/public/api/task/add", {
-                        title : this.title,
-                        description : this.description,
-                        priority : this.priority,
-                        end_date : this.end_date,
-                        users : this.userids
-                    }, {
+                    const create_task = await axios.post("http://172.16.30.19/ticketing/server/public/api/task/add", formData, {
                         headers : {
-                            "Authorization" : `Bearer ${this.$store.state.token}`
+                            "Authorization" : `Bearer ${this.$store.state.token}`,
+                            "Content-type" : "multipart/form-data"
                         }
                     });
 
