@@ -67,7 +67,8 @@ class TasksController extends Controller implements ITasks
                     $id = $create_task->id; // ახლად დამატებული დავალების აიდი
 
                     foreach($request->file("files") as $files) {
-                        $filename = Str::random(4) . "_" . $files->getClientOriginalName();
+                        $extension = $files->getClientOiriginalExtension();
+                        $filename = Str::random(4) . "_" . $files->getClientOriginalName() . "." . $extension;
 
                         $files->move(public_path("documents"), $filename);
 
@@ -94,6 +95,54 @@ class TasksController extends Controller implements ITasks
         }catch(Exception $e) {
             return response()->json([
                 "message" => "თქვენი დავალება ვერ გაიგზავნა"
+            ], 422);
+        }
+    }
+
+    /**
+     * თასქზე მიმაგრებული ფაილის წაშლის მეთოდი
+     * @method DELETE
+     * @return json
+     * @param int id
+     * 
+     * @OA\Delete(
+     *     path="/api/task/file/delete/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     tags={"დავალებების API"},
+     *     summary="დავალებაზე მიმაგრებული ფაილის წაშლის მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="ფაილი წაიშალა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="ფაილი ვერ წაიშალა",
+     *         response=422
+     *     ),
+     * 
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="ფაილი აიდი",
+     *         required=true,
+     *         in="path",
+     *         
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     * )
+     */
+    public function Delete_Task_File(int $id) {
+        $delete_file = TaskFile::whereId($id)->delete();
+
+        if($delete_file) {
+            return response()->json([
+                "message" => "ფაილი წაიშალა"
+            ], 200);
+        }else {
+            return response()->json([
+                "message" => "ფაილი ვერ წაიშალა"
             ], 422);
         }
     }
