@@ -86,8 +86,7 @@
                     });
 
                     this.details = loaded_task.data;
-
-                    this.$refs.commentForm.reset();
+                    this.comment = "";
                 }catch(err) {
                     console.log(err);
                 }
