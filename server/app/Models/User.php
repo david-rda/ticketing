@@ -21,6 +21,10 @@ class User extends Authenticatable
         "name", "email", "position", "role", "password"
     ];
 
+    protected $hidden = [
+        "password", "created_at", "updated_at"
+    ];
+
     public $timestamps = false;
 }
 

@@ -55,6 +55,8 @@ Route::group(["prefix" => "task", "middleware" => "auth:api"], function() {
     Route::get("/by/status/{status_id}", [TasksController::class, "Task_By_Status"])->where(["status_id" => "[0-9]+"]); // თასქების სტატუსის მიხედვით წამოღების მარშუტი
 
     Route::delete("/file/delete/{id}", [TasksController::class, "Delete_Task_File"])->where(["id" => "[0-9]+"]); // დავალებაზე მიმაგრებული ფაილის წაშლის მარშუტი
+
+    Route::post("/add/comment", [TasksController::class, "Add_Comment"]); // კომენტარის დამატების მარშუტი
 });
 
 ?>

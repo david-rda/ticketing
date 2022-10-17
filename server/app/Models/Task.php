@@ -33,11 +33,11 @@ class Task extends Model
     ];
 
     protected $appends = [
-        "performers", "documents"
+        "performers", "documents", "comments"
     ];
 
     protected $hidden = [
-        "performer", "files"
+        "performer", "files", "comment"
     ];
 
     public $timestamps = true;
@@ -47,7 +47,7 @@ class Task extends Model
     }
 
     public function comment() {
-        return $this->hasMany(Comment::class, "task_id", "id");
+        return $this->hasMany(Comment::class, "task_id", "id")->orderBy("created_at", "DESC");
     }
 
     public function performer() {
@@ -78,6 +78,10 @@ class Task extends Model
         return Attribute::make(
             get : fn() => $this->files
         );
+    }
+
+    public function getCommentsAttribute() {
+        return $this->comment;
     }
 }
 

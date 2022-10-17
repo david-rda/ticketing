@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use App\Models\Task;
 use App\Models\TaskHasPerformer;
 use App\Models\TaskFile;
+use App\Models\Comment;
 
 class TasksController extends Controller implements ITasks
 {
@@ -258,7 +259,7 @@ class TasksController extends Controller implements ITasks
                         "title" => $validated["title"],
                         "description" => $validated["description"],
                         "priority_id" => $validated["priority"],
-                        "end_date" => $validated["end_date"]
+                        "end_date" => strtotime($validated["end_date"])
                     ]);
 
                     if($request->hasFile("files")) {
@@ -438,5 +439,46 @@ class TasksController extends Controller implements ITasks
                     ->where("tasks.status_id", $status_id)
                     ->orderBy("created_at", "DESC")
                     ->get(); 
+    }
+
+    /**
+     * კომენტარის დამატების მეთოდი
+     * @method POST
+     * @param Request
+     * @return json
+     * 
+     * @OA\Post(
+     *     path="/api/task/add/comment",
+     *     security={{ "bearerAuth": {} }},
+     *     tags={"დავალებების API"},
+     *     summary="დავალებაზე კომენტარის დამატების მარშუტი",
+     * 
+     *     @OA\Response(
+     *         description="კომენტარი გაიგზავნა",
+     *         response=200
+     *     ),
+     * 
+     *     @OA\Response(
+     *         description="კომენტარი ვერ გაიგზავნა",
+     *         response=422
+     *     )
+     * )
+     */
+    public function Add_Comment(Request $request) {
+        try {
+            Comment::create([
+                "task_id" => $request->task_id,
+                "comment" => $request->comment,
+                "author_id" => Auth::id()
+            ]);
+
+            return response()->json([
+                "message" => "კომენტარი გაიგზავნა"
+            ], 200);
+        }catch(Exception $e) {
+            return response()->json([
+                "message" => "კომენტარი ვერ გაიგზავნა"
+            ], 422);
+        }
     }
 }
