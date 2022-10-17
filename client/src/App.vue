@@ -31,6 +31,10 @@
         overflow-x: hidden;
     }
 
+    .pointer {
+        pointer-events: none;
+    }
+
     * {
         box-sizing: border-box !important;
         font-family: "firago_regular" !important;

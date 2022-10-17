@@ -186,10 +186,6 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-
-        .pointer {
-            pointer-events: none;
-        }
     }
 
     .container-fluid {

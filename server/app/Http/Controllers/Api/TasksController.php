@@ -253,7 +253,6 @@ class TasksController extends Controller implements ITasks
 
         if($validated) {
             try {
-
                 DB::transaction(function() use($validated, $request, $id) {
                     Task::whereId($id)->update([
                         "title" => $validated["title"],
@@ -261,6 +260,19 @@ class TasksController extends Controller implements ITasks
                         "priority_id" => $validated["priority"],
                         "end_date" => $validated["end_date"]
                     ]);
+
+                    foreach($request->file("files") as $file) {
+                        $filename = Str::random(4) . "_" . $file->getClientOriginalName();
+
+                        $file->move(public_path("documents"), $filename);
+
+                        TaskFile::insert([
+                            "file" => $filename,
+                            "task_id" => $id,
+                            "created_at" => Carbon::now(),
+                            "updated_at" => Carbon::now()
+                        ]);
+                    }
 
                     foreach($request->users as $users) {
                         TaskHasPerformer::updateOrCreate([

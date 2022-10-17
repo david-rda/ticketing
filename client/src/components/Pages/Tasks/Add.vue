@@ -138,7 +138,7 @@
                 this.form.append("title", this.title);
                 this.form.append("description", this.description);
                 this.form.append("priority", this.priority);
-                this.form.append("end_date", new Date(this.end_date));
+                this.form.append("end_date", this.end_date);
                 
                 for(let i = 0; i < this.userids.length; i++) {
                     this.form.append("users[]", this.userids[i]);

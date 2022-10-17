@@ -3,7 +3,7 @@
         <HeaderComponent />
 
         <div class="container mt-5 custom-container bg-white">
-            <form method="POST" @submit.prevent="edit_task()" ref="taskForm">
+            <form method="POST" @submit.prevent="edit_task()">
                 <div class="mb-3">
                     <label for="title">სათაური</label>
                     <input type="text" id="title" name="title" v-model="title" class="form-control" placeholder="სათაური">
@@ -25,6 +25,17 @@
                 <div class="mb-3">
                     <label for="description">აღწერა</label>
                     <editor :init="{resize: false}" v-model="description"></editor>
+                </div>
+                <div class="mb-3">
+                    <input type="file" multiple class="form-control" @change="handleFiles($event)"><br>
+                    <table>
+                        <tbody>
+                            <tr v-for="files in this.task_files" :key="files.id">
+                                <td>{{ files.file }}&nbsp;&nbsp;</td>
+                                <td><button type="button" class="btn btn-danger" :data-file-id="files.id" @click="deleteFile($event)"><BIconTrash class="pointer" /></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="mb-3">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"><BIconPlusCircleFill />&nbsp;პასუხისმგებელი</button>
@@ -83,10 +94,12 @@
 
         data() {
             return {
+                formData : new FormData(),
                 end_date : new Date(),
                 priority : "",
                 title : "",
                 description : "",
+                task_files : [], // აქ ჩაიყრება დავალებაზე მიმაგრებული დოკუმენტები
 
                 priority_list : [],
                 created : "",
@@ -94,7 +107,8 @@
                 users : [], // აქ ჩაიყრება ძებნისას ნაპოვნი იუზერები
 
                 userids : [], // აქ ჩაიყრება დავალებაზე მიმაგრებული უზერების აიდები
-                fullname : ""
+                fullname : "",
+                task_new_files : [] // აქ ჩაიყრება ის ფაილები, რომელსაც მომხმარებელი რედაქტირებისას მიუთითებს
             }
         },
 
@@ -129,24 +143,37 @@
             this.description = task.description;
             this.priority = task.priority_id;
             this.userids = task.performers;
+            this.task_files = task.documents;
         },
 
         methods : {
+            handleFiles(e) {
+                for(let i = 0; i < e.target.files.length; i++) {
+                    this.task_new_files.push(e.target.files[i]);
+                }
+            },
+
             async edit_task() {
+                for(let i = 0; i < this.task_new_files.length; i++) {
+                    this.formData.append("files[]", this.task_new_files[i]);
+                }
+
+                for(let j = 0; j < this.userids.length; j++) {
+                    this.formData.append("users[]", this.userids[j]);
+                }
+
+                this.formData.append("title", this.title);
+                this.formData.append("description", this.description);
+                this.formData.append("priority", this.priority);
+                this.formData.append("end_date", this.end_date);
+
                 try {
-                    const create_task = await axios.put("http://172.16.30.19/ticketing/server/public/api/task/edit/" + this.$route.params.id, {
-                        title : this.title,
-                        description : this.description,
-                        priority : this.priority,
-                        end_date : this.end_date,
-                        users : this.userids
-                    }, {
+                    const create_task = await axios.put("http://172.16.30.19/ticketing/server/public/api/task/edit/" + this.$route.params.id, this.formData, {
                         headers : {
                             "Authorization" : `Bearer ${this.$store.state.token}`
                         }
                     });
 
-                    this.$refs.taskForm.reset();
                     this.created = true;
                     this.msg = create_task.data.message;
                 }catch(err) {
@@ -157,8 +184,24 @@
             },
 
             async user_search() {
-                const data = await userSearch(this.$store.state.token, this.fullname);
+                const data = await userSearch(this.$store.state.token, this.fullname); // მომხმარებლების ძებნის ფუნქცია
                 this.users = data.data;
+            },
+
+            async deleteFile(e) {
+                let id = e.target.getAttribute("data-file-id");
+                
+                try {
+                    const deleteFile = await axios.delete("http://172.16.30.19/ticketing/server/public/api/task/file/delete/" + id, {}, {
+                        headers : {
+                            "Authorization" : `Bearer ${this.$store.state.token}`
+                        }
+                    });
+
+                    window.alert(deleteFile.data.message)
+                }catch(err) {
+                    console.log(err);
+                }
             }
         }
     }

@@ -33,11 +33,11 @@ class Task extends Model
     ];
 
     protected $appends = [
-        "performers"
+        "performers", "documents"
     ];
 
     protected $hidden = [
-        "performer"
+        "performer", "files"
     ];
 
     public $timestamps = true;
@@ -61,7 +61,7 @@ class Task extends Model
     public function endDate() : Attribute {
         return Attribute::make(
             get : fn($value) => $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("Y/m/d"),
-            set : fn($value) => date("Y-m-d H:i:s", strtotime($value))
+            set : fn($value) => $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("Y/m/d")
         );
     }
 
@@ -73,6 +73,12 @@ class Task extends Model
         }
 
         return $ids;
+    }
+
+    public function documents() : Attribute {
+        return Attribute::make(
+            get : fn() => $this->files
+        );
     }
 }
 
