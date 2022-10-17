@@ -21,19 +21,7 @@ class User extends Authenticatable
         "name", "email", "position", "role", "password"
     ];
 
-    protected $appends = [
-        "task"
-    ];
-
     public $timestamps = false;
-
-    protected $hidden = [
-        "user_tasks"
-    ];
-
-    public function getTaskAttribute() {
-        return $this->user_tasks;
-    }
 }
 
 ?>

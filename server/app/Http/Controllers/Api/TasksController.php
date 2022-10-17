@@ -11,8 +11,10 @@ use App\Http\Requests\EditTaskRequest;
 use DB;
 use Auth;
 use Str;
+use Carbon\Carbon;
 use App\Models\Task;
 use App\Models\TaskHasPerformer;
+use App\Models\TaskFile;
 
 class TasksController extends Controller implements ITasks
 {
@@ -50,7 +52,7 @@ class TasksController extends Controller implements ITasks
      *     )
      * )
      */
-    public function Add_Task(AddTaskRequest $request) {        
+    public function Add_Task(AddTaskRequest $request) {
         try {
             $validated = $request->validated();
             
@@ -66,15 +68,16 @@ class TasksController extends Controller implements ITasks
 
                     $id = $create_task->id; // ახლად დამატებული დავალების აიდი
 
-                    foreach($request->file("files") as $files) {
-                        $extension = $files->getClientOiriginalExtension();
-                        $filename = Str::random(4) . "_" . $files->getClientOriginalName() . "." . $extension;
+                    foreach($request->file("files") as $data) {
+                        $filename = Str::random(4) . "_" . $data->getClientOriginalName();
 
-                        $files->move(public_path("documents"), $filename);
+                        $data->move(public_path("documents"), $filename);
 
                         TaskFile::insert([
                             "file" => $filename,
-                            "task_id" => $id
+                            "task_id" => $id,
+                            "created_at" => Carbon::now(),
+                            "updated_at" => Carbon::now()
                         ]);
                     }
 

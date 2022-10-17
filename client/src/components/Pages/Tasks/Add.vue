@@ -98,7 +98,8 @@
 
                 userids : [],
 
-                files : []
+                files : [],
+                form : new FormData()
             }
         },
 
@@ -129,20 +130,24 @@
             },
 
             async add_task() {
-                var formData = new FormData();
-
                 for(let i = 0; i < this.files.length; i++) {
-                    formData.append("files[]", this.files[i]);
+                    this.form.append("files[]", this.files[i]);
                 }
 
-                formData.append("title", this.title);
-                formData.append("description", this.description);
-                formData.append("priority", this.priority);
-                formData.append("end_date", this.end_date);
-                formData.append("users", this.userids);
+                this.form.append("title", this.title);
+                this.form.append("description", this.description);
+                this.form.append("priority", this.priority);
+                this.form.append("end_date", new Date(this.end_date));
+                
+
+                for(let i = 0; i < this.userids.length; i++) {
+                    this.form.append("users[]", this.userids[i]);
+                }
+
+                console.log(this.form.get("title"));
 
                 try {
-                    const create_task = await axios.post("http://172.16.30.19/ticketing/server/public/api/task/add", formData, {
+                    const create_task = await axios.post("http://172.16.30.19/ticketing/server/public/api/task/add", this.form, {
                         headers : {
                             "Authorization" : `Bearer ${this.$store.state.token}`,
                             "Content-type" : "multipart/form-data"

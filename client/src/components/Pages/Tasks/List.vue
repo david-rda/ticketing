@@ -164,8 +164,6 @@
                             "Authorization" : `Bearer ${this.$store.state.token}`
                         }
                     });
-
-                    //e.target.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = "none";
                 }catch(err) {
                     console.log(err);
                 }
