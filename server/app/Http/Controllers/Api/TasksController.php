@@ -73,7 +73,7 @@ class TasksController extends Controller implements ITasks
                         $files->move(public_path("documents"), $filename);
 
                         TaskFile::insert([
-                            "filename" => $filename,
+                            "file" => $filename,
                             "task_id" => $id
                         ]);
                     }
@@ -135,7 +135,7 @@ class TasksController extends Controller implements ITasks
      */
     public function Delete_Task_File(int $id) {
         try {
-            $filename = TaskFile::whereId($id)->first()->filename; // ბაზიდან წამოღებული ფაილის სახელი
+            $filename = TaskFile::whereId($id)->first()->file; // ბაზიდან წამოღებული ფაილის სახელი
             $delete_file = TaskFile::whereId($id)->delete(); // ბაზიდან ფაილის ამოშლა
             unlink(public_path("documents/") . $filename); // ფიზიკურად ფაილის წაშლა ფოლდერიდან
 

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Status;
 use App\Models\Comment;
 use App\Models\TaskHasPerformer;
+use App\Models\TaskFile;
 
 class Task extends Model
 {
@@ -51,6 +52,10 @@ class Task extends Model
 
     public function performer() {
         return $this->hasMany(TaskHasPerformer::class, "task_id", "id");
+    }
+
+    public function files() {
+        return $this->hasMany(TaskFile::class, "task_id", "id");
     }
 
     public function endDate() : Attribute {

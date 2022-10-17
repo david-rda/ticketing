@@ -15,7 +15,7 @@ class TaskFile extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        "filename", "task_id"
+        "file", "task_id"
     ];
 
     public $timestamps = true;
