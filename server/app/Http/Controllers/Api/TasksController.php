@@ -63,7 +63,7 @@ class TasksController extends Controller implements ITasks
                         "description" => $validated["description"],
                         "author_user_id" => Auth::user()->id,
                         "priority_id" => $validated["priority"],
-                        "end_date" => $validated["end_date"]
+                        "end_date" => strtotime($validated["end_date"])
                     ]);
 
                     $id = $create_task->id; // ახლად დამატებული დავალების აიდი

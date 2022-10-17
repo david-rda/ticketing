@@ -60,8 +60,7 @@ class Task extends Model
 
     public function endDate() : Attribute {
         return Attribute::make(
-            get : fn($value) => $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("Y/m/d"),
-            set : fn($value) => $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("Y/m/d")
+            get : fn($value) => $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("Y/m/d")
         );
     }
 

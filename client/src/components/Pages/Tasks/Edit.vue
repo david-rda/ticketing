@@ -193,7 +193,7 @@
                 let id = e.target.getAttribute("data-file-id");
                 
                 try {
-                    const deleteFile = await axios.delete("http://172.16.30.19/ticketing/server/public/api/task/file/delete/" + id, {}, {
+                    const deleteFile = await axios.delete("http://172.16.30.19/ticketing/server/public/api/task/file/delete/" + id, {
                         headers : {
                             "Authorization" : `Bearer ${this.$store.state.token}`
                         }
