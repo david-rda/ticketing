@@ -21,9 +21,6 @@
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
                                     </li>
                                     <li>
-                                        <router-link class="dropdown-item" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
-                                    </li>
-                                    <li>
                                         <a href="javascript:void(0)" class="dropdown-item" @click="deleteTask($event)" :data-task-id="data.task_id">წაშლა</a>
                                     </li>
                                 </ul>
@@ -33,7 +30,7 @@
                             <p v-html="data.description"></p>
                         </div>
                         <div class="card-footer">
-
+                            <router-link class="btn btn-info text-white" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                         </div>
                     </div>
                     <!-- START შემოსული დავალებების სია -->
@@ -55,9 +52,6 @@
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
                                     </li>
                                     <li>
-                                        <router-link class="dropdown-item" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
-                                    </li>
-                                    <li>
                                         <a href="javascript:void(0)" class="dropdown-item" @click="deleteTask($event)" :data-task-id="data.task_id">წაშლა</a>
                                     </li>
                                 </ul>
@@ -67,7 +61,7 @@
                             <p v-html="data.description"></p>
                         </div>
                         <div class="card-footer">
-
+                            <router-link class="btn btn-info text-white" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                         </div>
                     </div>
                     <!-- START შემოსული დავალებების სია -->
@@ -89,9 +83,6 @@
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
                                     </li>
                                     <li>
-                                        <router-link class="dropdown-item" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
-                                    </li>
-                                    <li>
                                         <a href="javascript:void(0)" class="dropdown-item" @click="deleteTask($event)" :data-task-id="data.task_id">წაშლა</a>
                                     </li>
                                 </ul>
@@ -101,7 +92,7 @@
                             <p v-html="data.description"></p>
                         </div>
                         <div class="card-footer">
-
+                            <router-link class="btn btn-info text-white" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                         </div>
                     </div>
                     <!-- START შემოსული დავალებების სია -->
@@ -123,9 +114,6 @@
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
                                     </li>
                                     <li>
-                                        <router-link class="dropdown-item" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
-                                    </li>
-                                    <li>
                                         <a href="javascript:void(0)" class="dropdown-item" @click="deleteTask($event)" :data-task-id="data.task_id">წაშლა</a>
                                     </li>
                                 </ul>
@@ -135,7 +123,7 @@
                             <p v-html="data.description"></p>
                         </div>
                         <div class="card-footer">
-
+                            <router-link class="btn btn-info text-white" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                         </div>
                     </div>
                     <!-- START შემოსული დავალებების სია -->
