@@ -28,6 +28,7 @@
         padding: 0;
         background-color: #fbfbfb !important;
         color: $fgColor;
+        overflow-x: hidden;
     }
 
     * {
