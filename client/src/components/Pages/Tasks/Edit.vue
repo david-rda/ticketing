@@ -154,6 +154,11 @@
             },
 
             async edit_task() {
+                this.formData.append("title", this.title);
+                this.formData.append("description", this.description);
+                this.formData.append("priority", this.priority);
+                this.formData.append("end_date", this.end_date);
+
                 for(let i = 0; i < this.task_new_files.length; i++) {
                     this.formData.append("files[]", this.task_new_files[i]);
                 }
@@ -162,15 +167,11 @@
                     this.formData.append("users[]", this.userids[j]);
                 }
 
-                this.formData.append("title", this.title);
-                this.formData.append("description", this.description);
-                this.formData.append("priority", this.priority);
-                this.formData.append("end_date", this.end_date);
-
                 try {
-                    const create_task = await axios.put("http://172.16.30.19/ticketing/server/public/api/task/edit/" + this.$route.params.id, this.formData, {
+                    const create_task = await axios.post("http://172.16.30.19/ticketing/server/public/api/task/edit/" + this.$route.params.id, this.formData, {
                         headers : {
-                            "Authorization" : `Bearer ${this.$store.state.token}`
+                            "Authorization" : `Bearer ${this.$store.state.token}`,
+                            "Content-type" : "multipart/form-data"
                         }
                     });
 

@@ -24,9 +24,9 @@ class EditTaskRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => "required|string",
+            "title" => "required",
             "description" => "required",
-            "priority" => "required|numeric",
+            "priority" => "required",
             "end_date" => "required"
         ];
     }

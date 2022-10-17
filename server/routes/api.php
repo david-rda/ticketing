@@ -50,7 +50,7 @@ Route::group(["prefix" => "task", "middleware" => "auth:api"], function() {
 
     Route::put("/mark/{id}", [TasksController::class, "Mark_Task_As_Done"])->where(["id" => "[0-9]+"]); // თასქების შესრულებულად მონიშვნის მარშუტი
 
-    Route::put("/edit/{id}", [TasksController::class, "Edit_Task"])->where(["id" => "[0-9]+"]); // თასქების რედაქტირების მარშუტი
+    Route::post("/edit/{id}", [TasksController::class, "Edit_Task"])->where(["id" => "[0-9]+"]); // თასქების რედაქტირების მარშუტი
 
     Route::get("/by/status/{status_id}", [TasksController::class, "Task_By_Status"])->where(["status_id" => "[0-9]+"]); // თასქების სტატუსის მიხედვით წამოღების მარშუტი
 

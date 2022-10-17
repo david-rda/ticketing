@@ -144,8 +144,6 @@
                     this.form.append("users[]", this.userids[i]);
                 }
 
-                console.log(this.form.get("title"));
-
                 try {
                     const create_task = await axios.post("http://172.16.30.19/ticketing/server/public/api/task/add", this.form, {
                         headers : {
