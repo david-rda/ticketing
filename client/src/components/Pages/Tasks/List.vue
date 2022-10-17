@@ -21,6 +21,9 @@
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
                                     </li>
                                     <li>
+                                        <router-link class="dropdown-item" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
+                                    </li>
+                                    <li>
                                         <a href="javascript:void(0)" class="dropdown-item" @click="deleteTask($event)" :data-task-id="data.task_id">წაშლა</a>
                                     </li>
                                 </ul>
@@ -50,6 +53,9 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
+                                    </li>
+                                    <li>
+                                        <router-link class="dropdown-item" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)" class="dropdown-item" @click="deleteTask($event)" :data-task-id="data.task_id">წაშლა</a>
@@ -83,6 +89,9 @@
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
                                     </li>
                                     <li>
+                                        <router-link class="dropdown-item" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
+                                    </li>
+                                    <li>
                                         <a href="javascript:void(0)" class="dropdown-item" @click="deleteTask($event)" :data-task-id="data.task_id">წაშლა</a>
                                     </li>
                                 </ul>
@@ -112,6 +121,9 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
+                                    </li>
+                                    <li>
+                                        <router-link class="dropdown-item" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)" class="dropdown-item" @click="deleteTask($event)" :data-task-id="data.task_id">წაშლა</a>
