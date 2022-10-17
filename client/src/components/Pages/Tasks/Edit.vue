@@ -3,7 +3,7 @@
         <HeaderComponent />
 
         <div class="container mt-5 custom-container bg-white">
-            <form method="POST" @submit.prevent="edit_task()">
+            <form method="POST" @submit.prevent="edit_task()" ref="taskForm">
                 <div class="mb-3">
                     <label for="title">სათაური</label>
                     <input type="text" id="title" name="title" v-model="title" class="form-control" placeholder="სათაური">
@@ -49,6 +49,12 @@
                         <h6 class="modal-title">პასუხისმგებელ პირზე მიმაგრება</h6>
                     </div>
                     <div class="modal-body">
+                        <form method="POST" class="mb-3">
+                            <input type="text" placeholder="სახელი, გვარი" class="form-control" v-model="fullname" @keyup="user_search()">
+                        </form>
+                        <div class="text-center mb-3">
+                            <span class="text-center">{{ notfound }}</span>
+                        </div>
                         <div class="list-unstyled" v-for="(user, index) in users" :key="index">
                             <li>
                                 <label><input type="checkbox" v-model="userids" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
@@ -70,6 +76,7 @@
     import '@vuepic/vue-datepicker/dist/main.css';
     import Editor from "@tinymce/tinymce-vue";
     import axios, { AxiosError } from "axios";
+    import userSearch from "../../../helpers/userSearch";
 
     export default {
         name : "EditTask",
@@ -84,9 +91,10 @@
                 priority_list : [],
                 created : "",
                 msg : "",
-                users : [],
+                users : [], // აქ ჩაიყრება ძებნისას ნაპოვნი იუზერები
 
-                userids : [],
+                userids : [], // აქ ჩაიყრება დავალებაზე მიმაგრებული უზერების აიდები
+                fullname : ""
             }
         },
 
@@ -107,14 +115,6 @@
             });
 
             this.priority_list = data.data;
-
-            const users_list = await axios.get("http://172.16.30.19/ticketing/server/public/api/user/list", {
-                headers : {
-                    "Authorization" : `Bearer ${this.$store.state.token}`
-                }
-            });
-
-            this.users = users_list.data;
 
             const loaded_task = await axios.get("http://172.16.30.19/ticketing/server/public/api/task/get/" + this.$route.params.id, {
                 headers : {
@@ -146,6 +146,7 @@
                         }
                     });
 
+                    this.$refs.taskForm.reset();
                     this.created = true;
                     this.msg = create_task.data.message;
                 }catch(err) {
@@ -154,6 +155,11 @@
                     }
                 }
             },
+
+            async user_search() {
+                const data = await userSearch(this.$store.state.token, this.fullname);
+                this.users = data.data;
+            }
         }
     }
 </script>

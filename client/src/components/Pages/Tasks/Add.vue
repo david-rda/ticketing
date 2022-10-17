@@ -3,7 +3,7 @@
         <HeaderComponent />
 
         <div class="container mt-5 custom-container bg-white">
-            <form method="POST" @submit.prevent="add_task()">
+            <form method="POST" @submit.prevent="add_task()" ref="taskForm">
                 <div class="mb-3">
                     <label for="title">სათაური</label>
                     <input type="text" id="title" name="title" v-model="title" class="form-control" placeholder="სათაური">
@@ -79,6 +79,7 @@
     import '@vuepic/vue-datepicker/dist/main.css';
     import Editor from "@tinymce/tinymce-vue";
     import axios, { AxiosError } from "axios";
+    import userSearch from "../../../helpers/userSearch";
 
     export default {
         name : "AddTask",
@@ -94,9 +95,9 @@
                 created : "",
                 msg : "",
                 fullname : "",
-                users : [],
+                users : [], // აქ ჩაიყრება ძებნისას ნაპოვნი იუზერები
 
-                userids : [],
+                userids : [], // აქ ჩაიყრება დავალებაზე მიმაგრებული უზერების აიდები
 
                 files : [],
                 form : new FormData()
@@ -139,7 +140,6 @@
                 this.form.append("priority", this.priority);
                 this.form.append("end_date", new Date(this.end_date));
                 
-
                 for(let i = 0; i < this.userids.length; i++) {
                     this.form.append("users[]", this.userids[i]);
                 }
@@ -154,6 +154,7 @@
                         }
                     });
 
+                    this.$refs.taskForm.reset();
                     this.created = true;
                     this.msg = create_task.data.message;
                 }catch(err) {
@@ -165,19 +166,8 @@
 
             async user_search() {
                 try {
-                    if(this.fullname.trim() == "" || this.fullname.trim() == null || this.fullname.length === 0) {
-                        return false;
-                    }else {
-                        const users = await axios.post("http://172.16.30.19/ticketing/server/public/api/user/search", {
-                            fullname : this.fullname
-                        }, {
-                            headers : {
-                                "Authorization" : `Bearer ${this.$store.state.token}`
-                            }
-                        });
-                        
-                        this.users = users.data;
-                    }
+                    const data = await userSearch(this.$store.state.token, this.fullname);
+                    this.users = data.data;
                 }catch(Err) {
                     console.log(Err);
                 }
