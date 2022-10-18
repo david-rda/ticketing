@@ -26,7 +26,7 @@
     html, body {
         margin: 0;
         padding: 0;
-        background-color: #fbfbfb !important;
+        background-color: #F4F4F4 !important;
         color: $fgColor;
     }
 

@@ -5,48 +5,33 @@
         <div class="container mt-5">
             <div class="row gx-5 gy-3">
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
-                    <div class="card text-center bg-info text-white">
-                        <div class="card-header">
-                            <h5 class="card-title">შემოსული</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <h1>{{ new_tasks_count }}</h1>
-                        </div>
+                    <div class="mb-3 text-center card-custom p-3" style="background-color:#F8EEE6">
+                        <p><b class="heading">შემოსული</b></p>
+                        <p><b>{{ new_tasks_count }}</b></p>
                     </div>
                 </div>
 
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
-                    <div class="card text-center bg-warning text-white">
-                        <div class="card-header">
-                            <h5 class="card-title">მიმდინარე</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <h1>{{ 0 }}</h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div class=" col-md-3 col-lg-3 col-sm-12 col-xs-12">
-                    <div class="card text-center bg-danger text-white">
-                        <div class="card-header">
-                            <h5 class="card-title">ვადაგადაცილებული</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <h1>{{ 0 }}</h1>
-                        </div>
+                    <div class="mb-3 text-center card-custom p-3" style="background-color:#EDDBDA">
+                        <p><b class="heading">მიმდინარე</b></p>
+                        <p><b>{{ 0 }}</b></p>
                     </div>
                 </div>
 
                 <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
-                    <div class="card text-center bg-success text-white">
-                        <div class="card-header">
-                            <h5 class="card-title">დაარქივებული</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <h1>{{ 0 }}</h1>
-                        </div>
+                    <div class="mb-3 text-center card-custom p-3" style="background-color:#E4DDEF">
+                        <p><b class="heading">ვადაგადაცილებული</b></p>
+                        <p><b>{{ 0 }}</b></p>
                     </div>
                 </div>
+
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="mb-3 text-center card-custom p-3" style="background-color:#BEDCDB">
+                        <p><b class="heading">დაარქივებული</b></p>
+                        <p><b>{{ 0 }}</b></p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -83,5 +68,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .card-custom {
+        border-radius: 10px;
+    }
 </style>

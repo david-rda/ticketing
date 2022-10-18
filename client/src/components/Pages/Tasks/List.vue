@@ -2,20 +2,18 @@
     <div>
         <HeaderComponent />
 
-        <div class="mt-5 container-fluid">
-            <div class="row">
-                <div class="col-3">
-                    <div class="mb-3">
-                        <h5 style="font-size: 17px">Not started</h5>
+        <div class="mt-4 container-fluid">
+            <div class="row g-4 gy-4">
+                <!-- START შემოსული დავალებების სია -->
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="mb-3 status-title p-3">
+                        <h5 style="font-size: 16px; color: #202020">Not started</h5>
                     </div>
-                    <hr style="color: rgb(173 173 173)">
-                    <!-- START შემოსული დავალებების სია -->
                     <div class="card mb-3" v-for="data in notStarted" :key="data.task_id">
                         <div class="card-header d-inline-flex">
                             <h6 class="card-title">{{ data.title }}</h6>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown"><BIconThreeDots /></a>
-
                                 <ul class="dropdown-menu">
                                     <li>
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
@@ -33,20 +31,18 @@
                             <router-link class="btn btn-info text-white" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                         </div>
                     </div>
-                    <!-- START შემოსული დავალებების სია -->
                 </div>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <h5 style="font-size: 17px">In progress</h5>
+                <!-- END შემოსული დავალებების სია -->
+                <!-- START მიმდინარე დავალებების სია -->
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="mb-3 status-title p-3">
+                        <h5 style="font-size: 16px; color: #202020">In progress</h5>
                     </div>
-                    <hr style="color: rgb(173 173 173)">
-                    <!-- START შემოსული დავალებების სია -->
                     <div class="card mb-3" v-for="data in inProgress" :key="data.task_id">
                         <div class="card-header d-inline-flex">
                             <h6 class="card-title">{{ data.title }}</h6>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown"><BIconThreeDots /></a>
-
                                 <ul class="dropdown-menu">
                                     <li>
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
@@ -64,20 +60,18 @@
                             <router-link class="btn btn-info text-white" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                         </div>
                     </div>
-                    <!-- START შემოსული დავალებების სია -->
                 </div>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <h5 style="font-size: 17px">Waiting</h5>
+                <!-- END მიმდინარე დავალებების სია -->
+                <!-- START განხილვის რეჟიმში მყოფი დავალებების სია -->
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="mb-3 status-title p-3">
+                        <h5 style="font-size: 16px; color: #202020">Waiting</h5>
                     </div>
-                    <hr style="color: rgb(173 173 173)">
-                    <!-- START შემოსული დავალებების სია -->
                     <div class="card mb-3" v-for="data in waiting" :key="data.task_id">
                         <div class="card-header d-inline-flex">
                             <h6 class="card-title">{{ data.title }}</h6>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown"><BIconThreeDots /></a>
-
                                 <ul class="dropdown-menu">
                                     <li>
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
@@ -95,20 +89,18 @@
                             <router-link class="btn btn-info text-white" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                         </div>
                     </div>
-                    <!-- START შემოსული დავალებების სია -->
                 </div>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <h5 style="font-size: 17px">Done</h5>
+                <!-- END განხილვის რეჟიმში მყოფი დავალებების სია -->
+                <!-- START შესრულებული დავალებების სია -->
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="mb-3 status-title p-3">
+                        <h5 style="font-size: 16px; color: #202020">Done</h5>
                     </div>
-                    <hr style="color: rgb(173 173 173)">
-                    <!-- START შემოსული დავალებების სია -->
                     <div class="card mb-3" v-for="data in done" :key="data.task_id">
                         <div class="card-header d-inline-flex">
                             <h6 class="card-title">{{ data.title }}</h6>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown"><BIconThreeDots /></a>
-
                                 <ul class="dropdown-menu">
                                     <li>
                                         <router-link class="dropdown-item" :to="'/task/edit/' + data.task_id">რედაქტირება</router-link>
@@ -126,8 +118,8 @@
                             <router-link class="btn btn-info text-white" :to="'/task/details/' + data.task_id">დეტალურად</router-link>
                         </div>
                     </div>
-                    <!-- START შემოსული დავალებების სია -->
                 </div>
+                <!-- END შესრულებული დავალებების სია -->
             </div>
         </div>
     </div>
@@ -193,5 +185,10 @@
         position: absolute;
         right: 0;
         margin-right: 10px;
+    }
+
+    .status-title {
+        border-radius: 10px;
+        background-color: #fff;
     }
 </style>

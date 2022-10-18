@@ -226,7 +226,7 @@
 
     .custom-container {
         padding: 20px;
-        border-radius: 6px;
+        border-radius: 20px;
     }
 
     .modal-body {
