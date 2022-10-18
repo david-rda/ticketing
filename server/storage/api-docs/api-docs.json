@@ -349,6 +349,40 @@
                 ]
             }
         },
+        "/api/task/file/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "დავალებების API"
+                ],
+                "summary": "დავალებაზე მიმაგრებული ფაილის წაშლის მარშუტი",
+                "description": "თასქზე მიმაგრებული ფაილის წაშლის მეთოდი",
+                "operationId": "881fa474bc7247b3cf05f58d1fa89c52",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ფაილი აიდი",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ფაილი წაიშალა"
+                    },
+                    "422": {
+                        "description": "ფაილი ვერ წაიშალა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/task/delete/{id}": {
             "delete": {
                 "tags": [
@@ -384,13 +418,13 @@
             }
         },
         "/api/task/edit/{id}": {
-            "put": {
+            "post": {
                 "tags": [
                     "დავალებების API"
                 ],
                 "summary": "დავალების რედაქტირების მარშუტი",
                 "description": "დავალების რედაქტირების მეთოდი",
-                "operationId": "0bc84a2a1270d79b550e8d7ec54a7e2e",
+                "operationId": "34512d14cea9785202892cb71171995f",
                 "parameters": [
                     {
                         "name": "id",
@@ -511,6 +545,29 @@
                     },
                     "422": {
                         "description": "დავალება ვერ ჩაიტვირთა"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/task/add/comment": {
+            "post": {
+                "tags": [
+                    "დავალებების API"
+                ],
+                "summary": "დავალებაზე კომენტარის დამატების მარშუტი",
+                "description": "კომენტარის დამატების მეთოდი",
+                "operationId": "7aac4e85e94d6cf9b5b0406fcbb9a428",
+                "responses": {
+                    "200": {
+                        "description": "კომენტარი გაიგზავნა"
+                    },
+                    "422": {
+                        "description": "კომენტარი ვერ გაიგზავნა"
                     }
                 },
                 "security": [
