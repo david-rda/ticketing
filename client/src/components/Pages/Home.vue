@@ -2,41 +2,49 @@
     <div>
         <HeaderComponent />
 
-        <div class="container-fluid mt-5">
-            <div class="row d-flex justify-content-center">
-                <div class="card text-center bg-info text-white col-md-2 col-lg-2 col-sm-12 col-xs-12">
-                    <div class="card-header">
-                        <h5 class="card-title">შემოსული</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <h1>{{ new_tasks_count }}</h1>
-                    </div>
-                </div>
-
-                <div class="card text-center bg-warning text-white col-md-2 col-lg-2 col-sm-12 col-xs-12">
-                    <div class="card-header">
-                        <h5 class="card-title">მიმდინარე</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <h1>{{ }}</h1>
+        <div class="container mt-5">
+            <div class="row gx-5 gy-3">
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="card text-center bg-info text-white">
+                        <div class="card-header">
+                            <h5 class="card-title">შემოსული</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <h1>{{ new_tasks_count }}</h1>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card text-center bg-danger text-white col-md-2 col-lg-2 col-sm-12 col-xs-12">
-                    <div class="card-header">
-                        <h5 class="card-title">ვადაგადაცილებული</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <h1>{{ }}</h1>
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="card text-center bg-warning text-white">
+                        <div class="card-header">
+                            <h5 class="card-title">მიმდინარე</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <h1>{{ 0 }}</h1>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card text-center bg-success text-white col-md-2 col-lg-2 col-sm-12 col-xs-12">
-                    <div class="card-header">
-                        <h5 class="card-title">დაარქივებული</h5>
+                <div class=" col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="card text-center bg-danger text-white">
+                        <div class="card-header">
+                            <h5 class="card-title">ვადაგადაცილებული</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <h1>{{ 0 }}</h1>
+                        </div>
                     </div>
-                    <div class="card-body text-center">
-                        <h1>{{ }}</h1>
+                </div>
+
+                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                    <div class="card text-center bg-success text-white">
+                        <div class="card-header">
+                            <h5 class="card-title">დაარქივებული</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <h1>{{ 0 }}</h1>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,7 +83,5 @@
 </script>
 
 <style lang="scss" scoped>
-    .card {
-        margin-left: 50px !important;
-    }
+
 </style>
