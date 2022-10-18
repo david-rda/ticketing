@@ -58,7 +58,7 @@
                         <div class="text-center mb-3">
                             <span class="text-center">{{ notfound }}</span>
                         </div>
-                        <div class="list-unstyled" v-for="(user, index) in users" :key="index">
+                        <div class="list-unstyled" v-for="(user, index) in users" :key="index" ref="list">
                             <li>
                                 <label><input type="checkbox" v-model="userids" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
                             </li>
@@ -100,7 +100,8 @@
                 userids : [], // აქ ჩაიყრება დავალებაზე მიმაგრებული უზერების აიდები
 
                 files : [],
-                form : new FormData()
+                form : new FormData(),
+                notfound : ""
             }
         },
 
@@ -166,8 +167,14 @@
                 try {
                     const data = await userSearch(this.$store.state.token, this.fullname);
                     this.users = data.data;
-                }catch(Err) {
-                    console.log(Err);
+                    this.notfound = "";
+                    this.$refs.list.style.dysplay = "block";
+                }catch(err) {
+                    if(err instanceof AxiosError) {
+                        this.notfound = "ვერ მოიძებნა";
+                        this.$refs.list.style.dysplay = "none";
+                        console.clear();
+                    }
                 }
             }
         }

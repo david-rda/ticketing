@@ -94,12 +94,12 @@ class UserController extends Controller implements IUser
      *     summary="მომხმარებელთა სიის გამოტანის მარშუტი",
      * 
      *     @OA\Response(
-     *         description="სია ჩაიტვირთა",
+     *         description="მოიძებნა",
      *         response=200
      *     ),
      *     
      *     @OA\Response(
-     *         description="სია ვერ ჩაიტვირთა",
+     *         description="ვერ მოიძებნა",
      *         response=422
      *     ),
      * 
@@ -115,7 +115,15 @@ class UserController extends Controller implements IUser
         @$translator = new CharTranslator();
         @$fullname = @$translator->english_to_georgian($request->fullname);
 
-        return User::where("name", "like", "%" . $fullname . "%")->get();
+        $result = User::where("name", "like", "%" . $fullname . "%")->get();
+
+        if($result->count()) {
+            return $result;
+        }else {
+            return response()->json([
+                "message" => "ვერ მოიძებნა"
+            ], 422);
+        }
     }
 
     /**
