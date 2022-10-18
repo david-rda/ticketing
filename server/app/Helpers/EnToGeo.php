@@ -8,7 +8,7 @@
         public function __construct() {
             $this->english = [
                 'a', 'b', 'g', 'd', 'e', 'v', 'z', 'T', 'i', 'k', 'l', 'm', 'n', 'o', 'p',
-                'zh', 'r', 's', 't', 'u', 'f', 'q', 'gh', 'y', 'S', 'ch', 'c', 'dz', 'w',
+                'zh', 'r', 's', 't', 'u', 'f', 'q', 'R', 'y', 'S', 'ch', 'c', 'dz', 'w',
                 'W', 'x', 'j', 'h'
             ];
 

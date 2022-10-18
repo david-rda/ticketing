@@ -64,7 +64,7 @@ class TasksController extends Controller implements ITasks
                         "description" => $validated["description"],
                         "author_user_id" => Auth::user()->id,
                         "priority_id" => $validated["priority"],
-                        "end_date" => strtotime($validated["end_date"])
+                        "end_date" => date("Y-m-d H:i:s", strtotime($validated["end_date"]))
                     ]);
 
                     $id = $create_task->id; // ახლად დამატებული დავალების აიდი
@@ -259,7 +259,7 @@ class TasksController extends Controller implements ITasks
                         "title" => $validated["title"],
                         "description" => $validated["description"],
                         "priority_id" => $validated["priority"],
-                        "end_date" => strtotime($validated["end_date"])
+                        "end_date" => date("Y-m-d H:i:s", strtotime($validated["end_date"]))
                     ]);
 
                     if($request->hasFile("files")) {

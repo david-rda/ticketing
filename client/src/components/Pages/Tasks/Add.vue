@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="mb-3 col-lg-6 col-md-6">
                         <label for="end_date">დასრულების ვადა</label>
-                        <Datepicker v-model="end_date" />
+                        <input type="datetime-local" v-model="end_date" name="end_date" id="end_date" class="form-control">
                     </div>
                     <div class="mb-3 col-lg-6 col-md-6">
                         <label for="priority">პრიორიტეტი</label>
@@ -75,8 +75,6 @@
 
 <script>
     import HeaderComponent from "../Layouts/Header.vue";
-    import Datepicker from '@vuepic/vue-datepicker';
-    import '@vuepic/vue-datepicker/dist/main.css';
     import Editor from "@tinymce/tinymce-vue";
     import axios, { AxiosError } from "axios";
     import userSearch from "../../../helpers/userSearch";
@@ -108,7 +106,6 @@
 
         components : {
             HeaderComponent,
-            Datepicker,
             Editor
         },
 
@@ -132,7 +129,7 @@
                 }
             },
 
-            async add_task() {
+            async add_task() {                
                 for(let i = 0; i < this.files.length; i++) {
                     this.form.append("files[]", this.files[i]);
                 }

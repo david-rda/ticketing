@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="mb-3 col-lg-6 col-md-6">
                         <label for="end_date">დასრულების ვადა</label>
-                        <Datepicker v-model="end_date" />
+                        <input type="datetime-local" v-model="this.end_date" name="end_date" id="end_date" class="form-control">
                     </div>
                     <div class="mb-3 col-lg-6 col-md-6">
                         <label for="priority">პრიორიტეტი</label>
@@ -83,8 +83,6 @@
 
 <script>
     import HeaderComponent from "../Layouts/Header.vue";
-    import Datepicker from '@vuepic/vue-datepicker';
-    import '@vuepic/vue-datepicker/dist/main.css';
     import Editor from "@tinymce/tinymce-vue";
     import axios, { AxiosError } from "axios";
     import userSearch from "../../../helpers/userSearch";
@@ -95,7 +93,7 @@
         data() {
             return {
                 formData : new FormData(), // ამ ობიექტში შეინახება ვეებიდან შეყვანილი მონაცემები
-                end_date : new Date(), // ამ ცვლადში დავალების ვადის მნიშვნელობა
+                end_date : "", // ამ ცვლადში დავალების ვადის მნიშვნელობა
                 priority : "", // ამ ცვლადში დავალების პრიორიტეტის მნიშვნელობა
                 title : "", // ამ ცვლადში დავალების სათაურის მნიშვნელობა
                 description : "", // ამ ცვლადში დავალების აღწერის მნიშვნელობა
@@ -116,7 +114,6 @@
 
         components : {
             HeaderComponent,
-            Datepicker,
             Editor
         },
 

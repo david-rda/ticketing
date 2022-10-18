@@ -36,7 +36,7 @@ class EditTaskRequest extends FormRequest
             "title.required" => "შეიყვანეთ სათაური",
             "description.required" => "შეიყვანეთ აღწერა",
             "priority.required" => "მიუთითეთ პრიორიტეტი",
-            "required.required" => "მოითითეთ დასრულების ვადა"
+            "end_date.required" => "მოითითეთ დასრულების ვადა"
         ];
     }
 }
