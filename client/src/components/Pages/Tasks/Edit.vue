@@ -64,9 +64,9 @@
                             <input type="text" placeholder="სახელი, გვარი" class="form-control" v-model="fullname" @keyup="user_search()">
                         </form>
                         <div class="text-center mb-3">
-                            <span class="text-center">{{ notfound }}</span>
+                            <span class="text-center user-select-none">{{ notfound }}</span>
                         </div>
-                        <div class="list-unstyled" v-for="(user, index) in users" :key="index">
+                        <div class="list-unstyled" v-for="(user, index) in users" :key="index" v-show="this.showlist">
                             <li>
                                 <label><input type="checkbox" v-model="userids" class="form-check-input" :value="user.id">&nbsp;&nbsp;&nbsp;<span>{{ user.name }}</span></label>
                             </li>
@@ -94,11 +94,11 @@
 
         data() {
             return {
-                formData : new FormData(),
-                end_date : new Date(),
-                priority : "",
-                title : "",
-                description : "",
+                formData : new FormData(), // ამ ობიექტში შეინახება ვეებიდან შეყვანილი მონაცემები
+                end_date : new Date(), // ამ ცვლადში დავალების ვადის მნიშვნელობა
+                priority : "", // ამ ცვლადში დავალების პრიორიტეტის მნიშვნელობა
+                title : "", // ამ ცვლადში დავალების სათაურის მნიშვნელობა
+                description : "", // ამ ცვლადში დავალების აღწერის მნიშვნელობა
                 task_files : [], // აქ ჩაიყრება დავალებაზე მიმაგრებული დოკუმენტები
 
                 priority_list : [],
@@ -108,7 +108,9 @@
 
                 userids : [], // აქ ჩაიყრება დავალებაზე მიმაგრებული უზერების აიდები
                 fullname : "",
-                task_new_files : [] // აქ ჩაიყრება ის ფაილები, რომელსაც მომხმარებელი რედაქტირებისას მიუთითებს
+                task_new_files : [], // აქ ჩაიყრება ის ფაილები, რომელსაც მომხმარებელი რედაქტირებისას მიუთითებს
+
+                showlist : true // მოცემული ცვლადი განსაზღვრავს მომხმარებელთა სიის ხილვადობას ძებნის შედეგიდან გამომდინარე
             }
         },
 
@@ -185,8 +187,18 @@
             },
 
             async user_search() {
-                const data = await userSearch(this.$store.state.token, this.fullname); // მომხმარებლების ძებნის ფუნქცია
-                this.users = data.data;
+                try {
+                    const data = await userSearch(this.$store.state.token, this.fullname);
+                    this.users = data.data;
+                    this.notfound = "";
+                    this.showlist = true;
+                }catch(err) {
+                    if(err instanceof AxiosError) {
+                        this.notfound = "ვერ მოიძებნა";
+                        this.showlist = false;
+                        console.clear();
+                    }
+                }
             },
 
             async deleteFile(e) {

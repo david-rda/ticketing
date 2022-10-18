@@ -56,7 +56,7 @@
                             <input type="text" placeholder="სახელი, გვარი" class="form-control" v-model="fullname" @keyup="user_search()">
                         </form>
                         <div class="text-center mb-3">
-                            <span class="text-center">{{ notfound }}</span>
+                            <span class="text-center user-select-none">{{ notfound }}</span>
                         </div>
                         <div class="list-unstyled" v-for="(user, index) in users" :key="index" v-show="this.showlist">
                             <li>
@@ -86,23 +86,23 @@
 
         data() {
             return {
-                end_date : new Date(),
-                priority : "",
-                title : "",
-                description : "",
+                end_date : new Date(), // ამ ცვლადში დავალების ვადის მნიშვნელობა
+                priority : "", // ამ ცვლადში დავალების პრიორიტეტის მნიშვნელობა
+                title : "", // ამ ცვლადში დავალების სათაურის მნიშვნელობა
+                description : "", // ამ ცვლადში დავალების აღწერის მნიშვნელობა
 
                 priority_list : [],
                 created : "",
                 msg : "",
-                fullname : "",
+                fullname : "", // ამ ცვლადში ინახება მომხმარებლის ძებნის ველში შეყვანილი ინფორმაცია
                 users : [], // აქ ჩაიყრება ძებნისას ნაპოვნი იუზერები
 
                 userids : [], // აქ ჩაიყრება დავალებაზე მიმაგრებული უზერების აიდები
 
                 files : [],
-                form : new FormData(),
-                notfound : "",
-                showlist : false
+                form : new FormData(), // ამ ობიექტში შეინახება ვეებიდან შეყვანილი მონაცემები
+                notfound : "", // ამ ცვლადში ინახება ძებნის შედეგად დაბრუნებული შეტყობინება
+                showlist : false // მოცემული ცვლადი განსაზღვრავს მომხმარებელთა სიის ხილვადობას ძებნის შედეგიდან გამომდინარე
             }
         },
 
